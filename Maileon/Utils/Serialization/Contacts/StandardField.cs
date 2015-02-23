@@ -7,31 +7,31 @@ using System.Xml.Serialization;
 
 using Maileon.Utils;
 
-namespace Maileon.Contacts
+namespace Maileon.Utils.Serialization.Contacts
 {
     /// <summary>
     /// A class for wrapping standard fields
     /// </summary>
-    public class StandardField 
+    public class XmlStandardField 
     {
         /// <summary>
         /// The name of this standard field
         /// </summary>
         [XmlElement("name")]
-        public StandardFieldNames Name { get; set; }
+        public XmlStandardFieldNames Name { get; set; }
         /// <summary>
         /// The value of this standard field
         /// </summary>
         [XmlElement("value")]
         public NullableValue<string> Value { get; set; }
 
-        public StandardField(StandardFieldNames name, string value)
+        public XmlStandardField(XmlStandardFieldNames name, string value)
         {
             this.Name = name;
             this.Value = value;
         }
 
-        public StandardField() { }
+        public XmlStandardField() { }
     }
 
     

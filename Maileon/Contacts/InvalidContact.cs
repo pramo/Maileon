@@ -4,25 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using System.Xml.Serialization;
+using Maileon.Utils.Serialization.Contacts;
 
 namespace Maileon.Contacts
 {
-    /// <summary>
-    /// A calss representing an invalid contact
-    /// </summary>
     public class InvalidContact : Contact
     {
         /// <summary>
         /// The SynchronizationError that makes this contact invalid
         /// </summary>
-        [XmlElement("error")]
-        public SynchronizationError Error { get; set; }
+        public SynchronizationError Error { get; private set; }
 
-        public InvalidContact() { }
-        public InvalidContact(SynchronizationError error) 
+        public InvalidContact(XmlInvalidContact contact) : base((XmlContact)contact)
         {
-		    this.Error = error;
-	    }
+            this.Error = new SynchronizationError(contact.Error);
+        }
     }
 }

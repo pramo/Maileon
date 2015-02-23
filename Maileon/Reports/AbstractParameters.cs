@@ -38,7 +38,7 @@ namespace Maileon.Reports
         /// <summary>
         /// Query the value of a standard contact field.
         /// </summary>
-        public List<StandardFieldNames> StandardFields { get; set; }
+        public List<XmlStandardFieldNames> StandardFields { get; set; }
         /// <summary>
         /// Query the value of a custom contact field.
         /// </summary>
@@ -53,7 +53,7 @@ namespace Maileon.Reports
             this.From = null;
             this.To = null;
             this.MailingIdFilter = new List<long>();
-            this.StandardFields = new List<StandardFieldNames>();
+            this.StandardFields = new List<XmlStandardFieldNames>();
             this.CustomFields = new List<string>();
         }
 

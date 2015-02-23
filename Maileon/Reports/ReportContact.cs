@@ -12,7 +12,7 @@ namespace Maileon.Reports
     /// <summary>
     /// A contact used in Maileon reports
     /// </summary>
-    public class ReportContact : Contact
+    public class ReportContact : XmlContact
     {
         /// <summary>
         /// Whether this contact is anonymized
@@ -24,7 +24,7 @@ namespace Maileon.Reports
         /// The field backups for this contact
         /// </summary>
         [XmlArray("field_backups"), XmlArrayItem("field_backup")]	
-	    public List<FieldBackupInstruction> FieldBackups { get; set; }
+	    public List<XmlFieldBackupInstruction> FieldBackups { get; set; }
 
         public ReportContact() { }
     }

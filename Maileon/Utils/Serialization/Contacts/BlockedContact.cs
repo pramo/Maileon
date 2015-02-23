@@ -6,14 +6,12 @@ using System.Threading.Tasks;
 
 using System.Xml.Serialization;
 
-using Maileon.Utils;
-
-namespace Maileon.Contacts
+namespace Maileon.Utils.Serialization.Contacts
 {
     /// <summary>
     /// Class representing a blocked contact in Maileon
     /// </summary>
-    public class BlockedContact : Contact
+    public class XmlBlockedContact : XmlContact
     {
         /// <summary>
         /// The reason for the blocking
@@ -26,7 +24,7 @@ namespace Maileon.Contacts
         [XmlElement("blocking_timestamp")]
         public Timestamp BlockingTimestamp { get; set; }
 
-        public BlockedContact() { }
+        public XmlBlockedContact() { }
 
     }
 }

@@ -51,7 +51,7 @@ namespace Maileon.Utils
         /// <param name="name">the name of the parameter</param>
         /// <param name="value">the value of the parameter</param>
         /// <returns>this query</returns>
-        public QueryParameters Add(string name, CustomFieldType value)
+        public QueryParameters Add(string name, XmlCustomFieldType value)
         {
             this.Add(new KeyValuePair<string, string>(name, MaileonEnums.GetValue(value)));
             return this;
@@ -299,10 +299,10 @@ namespace Maileon.Utils
         /// <param name="name"></param>
         /// <param name="values"></param>
         /// <returns></returns>
-        public QueryParameters AddList(string name, List<StandardFieldNames> values)
+        public QueryParameters AddList(string name, List<XmlStandardFieldNames> values)
         {
             if (values == null) return this;
-            foreach (StandardFieldNames elem in values)
+            foreach (XmlStandardFieldNames elem in values)
             {
                 this.Add(name, MaileonEnums.GetValue(elem));
             }

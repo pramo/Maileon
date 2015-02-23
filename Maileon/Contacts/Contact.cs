@@ -3,101 +3,87 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Serialization;
+
+using Maileon.Utils.Serialization.Contacts;
 
 namespace Maileon.Contacts
 {
-    /// <summary>
-    /// A class for wrapping a maileon contact
-    /// </summary>
-    [XmlRoot("contact")]
-    public class Contact
+    public enum StandardFields
     {
-        /// <summary>
-        /// The MaileonID for the contact
-        /// </summary>
-        [XmlElement("id")]
-        public string Id { get; set; }
-
-        /// <summary>
-        /// Whether the serialized object should containt the ID
-        /// </summary>
-        [XmlIgnore]
-        public bool IdSpecified { get; set; }
-
-        /// <summary>
-        /// The email address for the contact
-        /// </summary>
-        [XmlElement("email")]
-        public string Email { get; set; }
-
-        /// <summary>
-        /// The standard contact fields
-        /// </summary>
-        [XmlArray("standard_fields"), XmlArrayItem("field")]
-        public List<StandardField> StandardFields { get; set; }
-
-        /// <summary>
-        /// The custom contact fields
-        /// </summary>
-        [XmlArray("custom_fields"), XmlArrayItem("field")]
-        public List<CustomField> CustomFields { get; set; }
-
-        /// <summary>
-        /// The external ID of the contact
-        /// </summary>
-        [XmlElement("external_id")]
-        public string ExternalId { get; set; }
-
-        /// <summary>
-        /// Whether the serialized object should containt the external ID
-        /// </summary>
-        [XmlIgnore]
-        public bool ExternalIdSpecified { get; set; }
-
-        /// <summary>
-        /// The permission of the contact
-        /// </summary>
-        [XmlElement("permission")]
-        public Permissions Permission { get; set; }
-
-        /// <summary>
-        /// Setting this to false will disable serialization of the Permission element
-        /// </summary>
-        [XmlIgnore]
-        public bool PermissionSpecified { get; set; }
-
-        /// <summary>
-        /// Whether the contact's history has been anonymized
-        /// </summary>
-        [XmlIgnore]
-        public bool Anonymous { get; set; }
-
-        /// <summary>
-        /// Get a value purely for serialization purposes
-        /// </summary>
-        [XmlElement("anonymous")]
-        public string SerializeAnonymous
-        {
-            get { return this.Anonymous ? "1" : "0"; }
-            set { this.Anonymous = value == "1"; }
-        }
-
-        [XmlIgnore]
-        public bool SerializeAnonymousSpecified { get; set; }
-
-        public Contact() { }
-        public Contact(string email) 
-        {
-            this.Email = email;
-            this.Permission = Permissions.None;
-            this.StandardFields = new List<StandardField>();
-            this.CustomFields = new List<CustomField>();
-
-            this.PermissionSpecified = true;
-            this.ExternalIdSpecified = true;
-            this.IdSpecified = true;
-        }
+        ADDRESS,
+        BIRTHDAY,
+        CITY,
+        COUNTRY,
+        FIRSTNAME,
+        GENDER,
+        HNR,
+        LASTNAME,
+        FULLNAME,
+        LOCALE,
+        NAMEDAY,
+        ORGANIZATION,
+        REGION,
+        SALUTATION,
+        TITLE,
+        ZIP,
     }
 
+    public enum Permissions
+    {
+        None = 1,
+        SingleOptIn = 2,
+        ConfirmedOptIn = 3,
+        DoubleOptIn = 4,
+        DoubleOptInPlus = 5,
+        Other = 6
+    }
+
+    public enum SynchronizationModes
+    {
+        Update = 1,
+        Ignore = 2
+    }
+
+    public class Contact
+    {
+        public bool Anonymous { get; private set; }
+        public string Id { get; private set; }
+
+        public string ExternalId { get; private set; }
+        public string Email { get; set; }
+        public Permissions Permission { get; private set; }
+
+        public Dictionary<string, object> CustomFields { get; set; }
+        public Dictionary<StandardFields, object> StandardFields { get; set; }
+
+        public Contact()
+        {
+            CustomFields = new Dictionary<string, object>();
+            StandardFields = new Dictionary<StandardFields, object>();
+        }
+
+        public Contact(string email) : base()
+        {
+            this.Email = email;
+        }
+
+        internal Contact(XmlContact xml) : base()
+        {
+            this.Email = xml.Email;
+            this.Anonymous = xml.Anonymous;
+            this.ExternalId = xml.ExternalId;
+            this.Permission = xml.Permission;
+            this.Id = xml.Id;
+
+            foreach(XmlCustomField field in xml.CustomFields)
+            {
+                this.CustomFields.Add(field.Name, field.Value);
+            }
+
+            foreach(XmlStandardField field in xml.StandardFields)
+            {
+                this.StandardFields.Add(field.Name, field.Value);
+            }
+        }
+    }
 }

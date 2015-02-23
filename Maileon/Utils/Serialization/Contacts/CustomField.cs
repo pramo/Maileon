@@ -5,14 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-using Maileon.Utils;
-
-namespace Maileon.Contacts
+namespace Maileon.Utils.Serialization.Contacts
 {
     /// <summary>
     /// A class for wrapping custom fields
     /// </summary>
-    public class CustomField
+    public class XmlCustomField
     {
         /// <summary>
         /// The name of this custom field
@@ -25,12 +23,12 @@ namespace Maileon.Contacts
         [XmlElement("value")]
         public NullableValue<string> Value { get; set; }
 
-        public CustomField(string name, string value)
+        public XmlCustomField(string name, string value)
         {
             this.Name = name;
             this.Value = value;
         }
 
-        public CustomField() { }
+        public XmlCustomField() { }
     }
 }

@@ -5,12 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace Maileon.Contacts
+namespace Maileon.Utils.Serialization.Contacts
 {
     /// <summary>
     /// Maileon Contact Syncronization modes
     /// </summary>
-    public enum SynchronizationMode
+    public enum XmlSynchronizationMode
     {
         [XmlEnum("1")]
         Update = 1,
