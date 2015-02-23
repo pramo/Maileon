@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4C4ED148-2FB7-4323-BFC3-39D1C06735BA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Maileon</RootNamespace>
+    <AssemblyName>Maileon</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AbstractMaileonService.cs" />
+    <Compile Include="AddressCheck\AddressExistance.cs" />
+    <Compile Include="AddressCheck\DomainScore.cs" />
+    <Compile Include="AddressCheck\DomainScoreCollection.cs" />
+    <Compile Include="AddressCheck\MailserverDiagnosis.cs" />
+    <Compile Include="AddressCheck\QualityStatus.cs" />
+    <Compile Include="AddressCheck\SyntaxStatus.cs" />
+    <Compile Include="Blacklists\Blacklist.cs" />
+    <Compile Include="Blacklists\BlacklistCollection.cs" />
+    <Compile Include="Blacklists\EntryCollection.cs" />
+    <Compile Include="Blacklists\MaileonBlacklistsService.cs" />
+    <Compile Include="Contactfilters\ContactFilter.cs" />
+    <Compile Include="Contactfilters\ContactFilterCollection.cs" />
+    <Compile Include="Contactfilters\ContactFilterState.cs" />
+    <Compile Include="Contactfilters\MaileonContactFiltersService.cs" />
+    <Compile Include="Contacts\BlockedContact.cs" />
+    <Compile Include="Contacts\FieldBackupInstructionCollection.cs" />
+    <Compile Include="Contacts\Contact.cs" />
+    <Compile Include="Contacts\BlockedContactCollection.cs" />
+    <Compile Include="Contacts\CustomFieldDefinitionCollection.cs" />
+    <Compile Include="Contacts\ContactCollection.cs" />
+    <Compile Include="Contacts\CustomFieldDefinition.cs" />
+    <Compile Include="Contacts\CustomField.cs" />
+    <Compile Include="Contacts\CustomFieldType.cs" />
+    <Compile Include="Contacts\FieldBackupInstruction.cs" />
+    <Compile Include="Contacts\FieldType.cs" />
+    <Compile Include="Contacts\InvalidContact.cs" />
+    <Compile Include="Contacts\MaileonContactsService.cs" />
+    <Compile Include="Contacts\Permissions.cs" />
+    <Compile Include="Contacts\StandardField.cs" />
+    <Compile Include="Contacts\StandardFieldNames.cs" />
+    <Compile Include="Contacts\SynchronizationError.cs" />
+    <Compile Include="Contacts\SynchronizationMode.cs" />
+    <Compile Include="Contacts\SynchronizationReport.cs" />
+    <Compile Include="IMaileonXmlSerializable.cs" />
+    <Compile Include="Mailings\Attachment.cs" />
+    <Compile Include="Mailings\KeywordOperation.cs" />
+    <Compile Include="Mailings\MailingCollection.cs" />
+    <Compile Include="Mailings\Image.cs" />
+    <Compile Include="Mailings\AttachmentCollection.cs" />
+    <Compile Include="Mailings\Link.cs" />
+    <Compile Include="Mailings\ImageCollection.cs" />
+    <Compile Include="Mailings\LinkCollection.cs" />
+    <Compile Include="Mailings\MaileonMailingsService.cs" />
+    <Compile Include="Mailings\Mailing.cs" />
+    <Compile Include="Mailings\MailingField.cs" />
+    <Compile Include="Mailings\MailingFieldNames.cs" />
+    <Compile Include="Mailings\MailingStates.cs" />
+    <Compile Include="Mailings\MailingTypes.cs" />
+    <Compile Include="Mailings\Personalization.cs" />
+    <Compile Include="Mailings\PersonalizationCollection.cs" />
+    <Compile Include="Mailings\SpeedLevel.cs" />
+    <Compile Include="Mailings\StringOperation.cs" />
+    <Compile Include="Mailings\TrackingStrategy.cs" />
+    <Compile Include="Ping\MaileonPingService.cs" />
+    <Compile Include="Reports\AbstractEvent.cs" />
+    <Compile Include="Reports\Block.cs" />
+    <Compile Include="Reports\BlockReason.cs" />
+    <Compile Include="Reports\BlockStatus.cs" />
+    <Compile Include="Reports\Bounce.cs" />
+    <Compile Include="Reports\BounceCode.cs" />
+    <Compile Include="Reports\BlockCollection.cs" />
+    <Compile Include="Reports\BounceSource.cs" />
+    <Compile Include="Reports\BounceType.cs" />
+    <Compile Include="Reports\Click.cs" />
+    <Compile Include="Reports\DeviceType.cs" />
+    <Compile Include="Reports\MaileonReportsService.cs" />
+    <Compile Include="Reports\Open.cs" />
+    <Compile Include="Reports\ClickCollection.cs" />
+    <Compile Include="Reports\OpenCollection.cs" />
+    <Compile Include="Reports\BounceCollection.cs" />
+    <Compile Include="Reports\BlockParameters.cs" />
+    <Compile Include="Reports\ClickParameters.cs" />
+    <Compile Include="Reports\BounceParameters.cs" />
+    <Compile Include="Reports\SocialNetwork.cs" />
+    <Compile Include="Reports\SubscriberParameters.cs" />
+    <Compile Include="Reports\UnsubscriptionParameters.cs" />
+    <Compile Include="Reports\RecipientParameters.cs" />
+    <Compile Include="Reports\OpenParameters.cs" />
+    <Compile Include="Reports\AbstractParameters.cs" />
+    <Compile Include="Reports\Subscriber.cs" />
+    <Compile Include="Reports\SubscriberCollection.cs" />
+    <Compile Include="Reports\UnsubscriptionCollection.cs" />
+    <Compile Include="Reports\RecipientCollection.cs" />
+    <Compile Include="Reports\EmailClient.cs" />
+    <Compile Include="Format.cs" />
+    <Compile Include="Reports\Recipient.cs" />
+    <Compile Include="Reports\ReportContact.cs" />
+    <Compile Include="Reports\Unsubscription.cs" />
+    <Compile Include="Reports\UnsubscriptionSource.cs" />
+    <Compile Include="Transactions\TransactionProcessingReport.cs" />
+    <Compile Include="Transactions\TransactionProcessingReports.cs" />
+    <Compile Include="Transactions\TransactionTypeCollection.cs" />
+    <Compile Include="Transactions\MaileonTransactionsService.cs" />
+    <Compile Include="Utils\JSON\MaileonJsonAttribute.cs" />
+    <Compile Include="Utils\JSON\MaileonJsonConverter.cs" />
+    <Compile Include="Utils\MaileonEnums.cs" />
+    <Compile Include="Utils\HttpStatus.cs" />
+    <Compile Include="MaileonConfiguration.cs" />
+    <Compile Include="MaileonException.cs" />
+    <Compile Include="Page.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResponseWrapper.cs" />
+    <Compile Include="Transactions\Attribute.cs" />
+    <Compile Include="Transactions\AttributeType.cs" />
+    <Compile Include="Transactions\ContactReference.cs" />
+    <Compile Include="Transactions\Transaction.cs" />
+    <Compile Include="Transactions\TransactionType.cs" />
+    <Compile Include="Utils\NullableValue.cs" />
+    <Compile Include="Utils\QueryParameters.cs" />
+    <Compile Include="Utils\SerializationUtil.cs" />
+    <Compile Include="Utils\Timestamp.cs" />
+    <Compile Include="Utils\UrlBuilder.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
