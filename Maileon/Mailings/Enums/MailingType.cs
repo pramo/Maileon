@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace Maileon.Mailings
 {
-    public enum MailingTypes
+    public enum MailingType
     {
         [XmlEnum("doi")]
         Doi,

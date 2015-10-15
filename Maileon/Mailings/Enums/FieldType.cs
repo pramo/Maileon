@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace Maileon.Mailings
 {
-    public enum MailingFieldNames
+    public enum FieldType
     {
         [XmlEnum("type")]
         Type,

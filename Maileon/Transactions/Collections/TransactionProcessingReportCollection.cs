@@ -10,16 +10,16 @@ using System.Runtime.Serialization;
 
 namespace Maileon.Transactions
 {
-    public class TransactionProcessingReports
+    public class TransactionProcessingReportCollection
     {
         [MaileonJsonAttribute("reports")]
         public List<TransactionProcessingReport> Items { get; set; }
 
-        public static implicit operator List<TransactionProcessingReport>(TransactionProcessingReports r)
+        public static implicit operator List<TransactionProcessingReport>(TransactionProcessingReportCollection r)
         {
             return r.Items;
         }
 
-        public TransactionProcessingReports() { }
+        public TransactionProcessingReportCollection() { }
     }
 }

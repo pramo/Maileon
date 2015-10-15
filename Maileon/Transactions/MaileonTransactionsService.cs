@@ -112,7 +112,7 @@ namespace Maileon.Transactions
 
             ResponseWrapper response = Post("transactions", parameters, MAILEON_JSON_TYPE, SerializationUtils<List<Transaction>>.ToJsonString(transactions));
 
-            return SerializationUtils<TransactionProcessingReports>.FromJsonString(response.Body);
+            return SerializationUtils<TransactionProcessingReportCollection>.FromJsonString(response.Body);
         }
 
         /// <summary>

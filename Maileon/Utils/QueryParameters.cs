@@ -51,7 +51,7 @@ namespace Maileon.Utils
         /// <param name="name">the name of the parameter</param>
         /// <param name="value">the value of the parameter</param>
         /// <returns>this query</returns>
-        public QueryParameters Add(string name, MailingTypes value)
+        public QueryParameters Add(string name, MailingType value)
         {
             this.Add(new KeyValuePair<string, string>(name, MaileonEnums.ToXmlString(value)));
             return this;
@@ -63,7 +63,7 @@ namespace Maileon.Utils
         /// <param name="name">the name of the parameter</param>
         /// <param name="value">the value of the parameter</param>
         /// <returns>this query</returns>
-        public QueryParameters Add(string name, MailingFieldNames value)
+        public QueryParameters Add(string name, Mailings.FieldType value)
         {
             this.Add(new KeyValuePair<string, string>(name, MaileonEnums.ToXmlString(value)));
             return this;
@@ -287,10 +287,10 @@ namespace Maileon.Utils
         /// <param name="name"></param>
         /// <param name="values"></param>
         /// <returns></returns>
-        public QueryParameters AddList(string name, List<MailingFieldNames> values)
+        public QueryParameters AddList(string name, List<Mailings.FieldType> values)
         {
             if (values == null) return this;
-            foreach (MailingFieldNames elem in values)
+            foreach (Mailings.FieldType elem in values)
             {
                 this.Add(name, MaileonEnums.ToXmlString(elem));
             }
@@ -303,10 +303,10 @@ namespace Maileon.Utils
         /// <param name="name"></param>
         /// <param name="values"></param>
         /// <returns></returns>
-        public QueryParameters AddList(string name, List<MailingTypes> values)
+        public QueryParameters AddList(string name, List<MailingType> values)
         {
             if (values == null) return this;
-            foreach (MailingTypes elem in values)
+            foreach (MailingType elem in values)
             {
                 this.Add(name, MaileonEnums.ToXmlString(elem));
             }
@@ -319,10 +319,10 @@ namespace Maileon.Utils
         /// <param name="name"></param>
         /// <param name="values"></param>
         /// <returns></returns>
-        public QueryParameters AddList(string name, List<MailingStates> values)
+        public QueryParameters AddList(string name, List<MailingState> values)
         {
             if (values == null) return this;
-            foreach (MailingStates elem in values)
+            foreach (MailingState elem in values)
             {
                 this.Add(name, MaileonEnums.ToXmlString(elem));
             }
@@ -351,10 +351,10 @@ namespace Maileon.Utils
         /// <param name="name"></param>
         /// <param name="values"></param>
         /// <returns></returns>
-        public QueryParameters AddList(string name, List<StandardFieldNames> values)
+        public QueryParameters AddList(string name, List<StandardFieldName> values)
         {
             if (values == null) return this;
-            foreach (StandardFieldNames elem in values)
+            foreach (StandardFieldName elem in values)
             {
                 this.Add(name, MaileonEnums.ToXmlString(elem));
             }

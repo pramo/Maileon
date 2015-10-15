@@ -18,14 +18,14 @@ namespace Maileon.Contacts
         /// The name of this standard field
         /// </summary>
         [XmlElement("name")]
-        public StandardFieldNames Name { get; set; }
+        public StandardFieldName Name { get; set; }
         /// <summary>
         /// The value of this standard field
         /// </summary>
         [XmlElement("value")]
         public NullableValue<string> Value { get; set; }
 
-        public StandardField(StandardFieldNames name, string value)
+        public StandardField(StandardFieldName name, string value)
         {
             this.Name = name;
             this.Value = value;

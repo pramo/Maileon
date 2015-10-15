@@ -126,7 +126,7 @@ namespace Maileon.Contacts
         /// <param name="pageIndex">the idnex of the page</param>
         /// <param name="pageSize">the number of items on the page</param>
         /// <returns>a page of contacts</returns>
-        public Page<Contact> GetContacts(List<StandardFieldNames> standardFields, List<string> customFields, int pageIndex, int pageSize)
+        public Page<Contact> GetContacts(List<StandardFieldName> standardFields, List<string> customFields, int pageIndex, int pageSize)
         {
             ValidatePaginationParameters(pageIndex, pageSize);
 
@@ -152,7 +152,7 @@ namespace Maileon.Contacts
         /// <param name="pageIndex">the page index</param>
         /// <param name="pageSize">the page size</param>
         /// <returns>a page of contacts</returns>
-        public Page<Contact> GetContactsByFilterId(long contactFilterId, List<StandardFieldNames> standardFields, List<string> customFields, int pageIndex, int pageSize) 
+        public Page<Contact> GetContactsByFilterId(long contactFilterId, List<StandardFieldName> standardFields, List<string> customFields, int pageIndex, int pageSize) 
         {
             QueryParameters parameters = new QueryParameters();
             parameters.Add("page_index", pageIndex);
@@ -173,7 +173,7 @@ namespace Maileon.Contacts
         /// <param name="standardFields">the standard fields</param>
         /// <param name="customFields">the custom fields</param>
         /// <returns>a contact</returns>
-        public Contact GetContact(String email, List<StandardFieldNames> standardFields, List<String> customFields) 
+        public Contact GetContact(String email, List<StandardFieldName> standardFields, List<String> customFields) 
         {
             QueryParameters parameters = new QueryParameters();
             parameters.AddList("standard_field", standardFields);
@@ -191,7 +191,7 @@ namespace Maileon.Contacts
         /// <param name="standardFields">the standard fields</param>
         /// <param name="customFields">the custom fields</param>
         /// <returns>a contact</returns>
-        public Contact GetContact(long id, string checksum, List<StandardFieldNames> standardFields, List<string> customFields)
+        public Contact GetContact(long id, string checksum, List<StandardFieldName> standardFields, List<string> customFields)
         {
             QueryParameters parameters = new QueryParameters();
             parameters.Add("id", id);
@@ -210,7 +210,7 @@ namespace Maileon.Contacts
         /// <param name="standardFields">the standard fields</param>
         /// <param name="customFields">the custom fields</param>
         /// <returns>a list of contacts</returns>
-        public List<Contact> GetContactsByExternalId(string externalId, List<StandardFieldNames> standardFields, List<string> customFields)
+        public List<Contact> GetContactsByExternalId(string externalId, List<StandardFieldName> standardFields, List<string> customFields)
         {
             QueryParameters parameters = new QueryParameters();
             parameters.AddList("standard_field", standardFields);
@@ -290,7 +290,7 @@ namespace Maileon.Contacts
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <returns>a page of blocked contacts</returns>
-        public Page<BlockedContact> GetBlockedContacts(List<StandardFieldNames> standardFields, List<string> customFields, int pageIndex, int pageSize) 
+        public Page<BlockedContact> GetBlockedContacts(List<StandardFieldName> standardFields, List<string> customFields, int pageIndex, int pageSize) 
         {
             ValidatePaginationParameters(pageIndex, pageSize);
 
@@ -349,7 +349,7 @@ namespace Maileon.Contacts
         /// Deletes the values of the given standard contact field for all contacts.
         /// </summary>
         /// <param name="field"></param>
-        public void DeleteStandardFieldValues(StandardFieldNames field)
+        public void DeleteStandardFieldValues(StandardFieldName field)
         {
             Delete("contacts/fields/standard/" + HttpUtility.UrlEncode(MaileonEnums.ToXmlString(field)) + "/values");
         }
@@ -370,7 +370,7 @@ namespace Maileon.Contacts
         /// <param name="standardFields"></param>
         /// <param name="customFields"></param>
         /// <returns></returns>
-        public List<Contact> GetContactsByEmail(string email, List<StandardFieldNames> standardFields, List<string> customFields) 
+        public List<Contact> GetContactsByEmail(string email, List<StandardFieldName> standardFields, List<string> customFields) 
         {
             QueryParameters parameters = new QueryParameters();
             parameters.AddList("standard_field", standardFields);

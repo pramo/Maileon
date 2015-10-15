@@ -37,7 +37,7 @@ namespace Maileon.Contacts
 
         public FieldBackupInstruction() { }
         public FieldBackupInstruction(string name) : this(name, FieldType.Custom, null) { }
-        public FieldBackupInstruction(StandardFieldNames name) : this(Enum.GetName(typeof(StandardFieldNames), name).ToUpper(), FieldType.Standard, null) { }
+        public FieldBackupInstruction(StandardFieldName name) : this(Enum.GetName(typeof(StandardFieldName), name).ToUpper(), FieldType.Standard, null) { }
         public FieldBackupInstruction(string name, string subType) : this(name, FieldType.Event, subType) { }
         private FieldBackupInstruction(string name, FieldType type) : this(name, type, null) { }
         private FieldBackupInstruction(string name, FieldType type, string subType)

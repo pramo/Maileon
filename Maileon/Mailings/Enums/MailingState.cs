@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace Maileon.Mailings
 {
-    public enum MailingStates
+    public enum MailingState
     {
         [XmlEnum("draft")]
         Draft,

@@ -13,7 +13,7 @@ namespace Maileon.Mailings
     public class MailingField
     {
         [XmlElement("name")]
-        public MailingFieldNames Name { get; set; }
+        public FieldType Name { get; set; }
         [XmlElement("value")]
         public string Value { get; set; }
 
@@ -25,12 +25,12 @@ namespace Maileon.Mailings
         {
             switch (Name)
             {
-                case MailingFieldNames.Type:
-                    return MaileonEnums.FromXmlString<MailingTypes>(Value);
-                case MailingFieldNames.ScheduleTime:
+                case FieldType.Type:
+                    return MaileonEnums.FromXmlString<MailingType>(Value);
+                case FieldType.ScheduleTime:
                     return new Timestamp(Value);
-                case MailingFieldNames.State:
-                    return MaileonEnums.FromXmlString<MailingStates>(Value);
+                case FieldType.State:
+                    return MaileonEnums.FromXmlString<MailingState>(Value);
                 default:
                     return Value;
             }

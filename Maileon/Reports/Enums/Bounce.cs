@@ -18,4 +18,15 @@ namespace Maileon.Reports
         [XmlEnum("reply")]
         Reply
     }
+
+    /// <summary>
+    /// The valid bounce types
+    /// </summary>
+    public enum BounceType
+    {
+        [XmlEnum("permanent")]
+        Permanent,
+        [XmlEnum("transient")]
+        Transient
+    }
 }

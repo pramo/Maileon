@@ -10,7 +10,7 @@ namespace Maileon.Contacts
     /// <summary>
     /// Maileon Contact standard fields
     /// </summary>
-    public enum StandardFieldNames
+    public enum StandardFieldName
     {
         /// <summary>
         /// The length must not exceed 255 characters.

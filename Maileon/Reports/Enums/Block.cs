@@ -18,4 +18,15 @@ namespace Maileon.Reports
         [XmlEnum("bounce_policy")]
         BouncePolicy,
     }
+
+    /// <summary>
+    /// The status of this block
+    /// </summary>
+    public enum BlockStatus
+    {
+        [XmlEnum("allowed")]
+        Allowed,
+        [XmlEnum("blocked")]
+        Blocked
+    }
 }

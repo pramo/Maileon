@@ -26,7 +26,7 @@ namespace Maileon.Mailings
         /// <returns>The ID of the newly created regular mailing</returns>
         public long CreateMailing(string name, string subject) 
         {
-            return CreateMailing(name, subject, MailingTypes.Regular);
+            return CreateMailing(name, subject, MailingType.Regular);
         }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace Maileon.Mailings
         /// <param name="subject">The subject of the mailing. The length of the subject must not exceed 255 characters. The subject is not allowed to be empty. ISO Control characters are forbidden in the subject.</param>
         /// <param name="type">The type of the mailing</param>
         /// <returns>The ID of the newly created mailing</returns>
-        public long CreateMailing(string name, string subject, MailingTypes type)
+        public long CreateMailing(string name, string subject, MailingType type)
         {
             QueryParameters parameters = new QueryParameters();
             parameters.Add("name", name);
@@ -81,10 +81,10 @@ namespace Maileon.Mailings
         /// </summary>
         /// <param name="mailingId"></param>
         /// <returns></returns>
-        public MailingTypes GetType(long mailingId) 
+        public MailingType GetType(long mailingId) 
         {
             ResponseWrapper response = Get("mailings/" + mailingId.ToString() + "/type");
-            return SerializationUtils<MailingTypes>.FromXmlString(response.Body, "type");
+            return SerializationUtils<MailingType>.FromXmlString(response.Body, "type");
         }
 
         /// <summary>
@@ -92,10 +92,10 @@ namespace Maileon.Mailings
         /// </summary>
         /// <param name="mailingId"></param>
         /// <returns></returns>
-        public MailingStates GetState(long mailingId) 
+        public MailingState GetState(long mailingId) 
         {
             ResponseWrapper response = Get("mailings/" + mailingId.ToString() + "/state");
-            return SerializationUtils<MailingStates>.FromXmlString(response.Body, "state");
+            return SerializationUtils<MailingState>.FromXmlString(response.Body, "state");
         }
 
         /// <summary>
@@ -774,7 +774,7 @@ namespace Maileon.Mailings
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
-        public Page<Mailing> GetMailingsBySchedulingTime(Timestamp scheduleTime, bool beforeSchedulingTime, List<MailingFieldNames> fields, Order? order, MailingFieldNames? orderBy, int pageIndex, int pageSize) 
+        public Page<Mailing> GetMailingsBySchedulingTime(Timestamp scheduleTime, bool beforeSchedulingTime, List<FieldType> fields, Order? order, FieldType? orderBy, int pageIndex, int pageSize) 
         {
             ValidatePaginationParameters(pageIndex, pageSize);
             
@@ -801,7 +801,7 @@ namespace Maileon.Mailings
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
-        public Page<Mailing> GetMailingsByTypes(List<MailingTypes> types, List<MailingFieldNames> fields, Order? order, MailingFieldNames? orderBy, int pageIndex, int pageSize) 
+        public Page<Mailing> GetMailingsByTypes(List<MailingType> types, List<FieldType> fields, Order? order, FieldType? orderBy, int pageIndex, int pageSize) 
         {
             ValidatePaginationParameters(pageIndex, pageSize);
             
@@ -832,7 +832,7 @@ namespace Maileon.Mailings
          * @return
          * @throws MaileonException
          */
-        public Page<Mailing> GetMailingsByStates(List<MailingStates> states, List<MailingFieldNames> fields, Order? order, MailingFieldNames? orderBy, int pageIndex, int pageSize)
+        public Page<Mailing> GetMailingsByStates(List<MailingState> states, List<FieldType> fields, Order? order, FieldType? orderBy, int pageIndex, int pageSize)
         {
             ValidatePaginationParameters(pageIndex, pageSize);
 
@@ -860,7 +860,7 @@ namespace Maileon.Mailings
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
-	    public Page<Mailing> GetMailingsByKeywords(List<string> keywords, StringOperation keywordsOp, List<MailingFieldNames> fields, Order? order, MailingFieldNames? orderBy, int pageIndex, int pageSize) 
+	    public Page<Mailing> GetMailingsByKeywords(List<string> keywords, StringOperation keywordsOp, List<FieldType> fields, Order? order, FieldType? orderBy, int pageIndex, int pageSize) 
         { 
             ValidatePaginationParameters(pageIndex, pageSize);
 
@@ -888,7 +888,7 @@ namespace Maileon.Mailings
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
-        public Page<Mailing> GetMailingsByCreatorName(string creatorName, StringOperation creatorNameOp, List<MailingFieldNames> fields, Order? order, MailingFieldNames? orderBy, int pageIndex, int pageSize) 
+        public Page<Mailing> GetMailingsByCreatorName(string creatorName, StringOperation creatorNameOp, List<FieldType> fields, Order? order, FieldType? orderBy, int pageIndex, int pageSize) 
         {
             ValidatePaginationParameters(pageIndex, pageSize);
 
@@ -916,7 +916,7 @@ namespace Maileon.Mailings
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
-        public Page<Mailing> GetMailingsBySubject(string subject, StringOperation subjectOp, List<MailingFieldNames> fields, Order? order, MailingFieldNames? orderBy, int pageIndex, int pageSize) { 
+        public Page<Mailing> GetMailingsBySubject(string subject, StringOperation subjectOp, List<FieldType> fields, Order? order, FieldType? orderBy, int pageIndex, int pageSize) { 
             ValidatePaginationParameters(pageIndex, pageSize);
 
             QueryParameters parameters = new QueryParameters();
@@ -934,7 +934,7 @@ namespace Maileon.Mailings
             return page;
 	    }
 
-        private QueryParameters AddOrdering(QueryParameters parameters, Order? order, MailingFieldNames? field)
+        private QueryParameters AddOrdering(QueryParameters parameters, Order? order, FieldType? field)
         {
             if (field.HasValue)
             {
