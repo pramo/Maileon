@@ -37,14 +37,14 @@ namespace Maileon.Utils
         private static DateTime unixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
         /// <summary>
-        /// Return the milliseconds passed since the UNIX epoch (Java long time)
+        /// Returns the milliseconds passed since the UNIX epoch (Java long time)
         /// </summary>
         [XmlIgnore]
         public long TimeInMillis
         {
             get
             {
-                return (long)this.DateTime.Subtract(unixEpoch).TotalMilliseconds;
+                return (long)unixEpoch.Subtract(this.DateTime).TotalMilliseconds;
             }
             private set { }
         }
@@ -68,6 +68,10 @@ namespace Maileon.Utils
         public Timestamp(DateTime d)
         {
             this.DateTime = d;
+        }
+        public Timestamp(string s)
+        {
+            this.DateTime = DateTime.Parse(s);
         }
     }
 }
