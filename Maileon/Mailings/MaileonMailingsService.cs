@@ -781,7 +781,7 @@ namespace Maileon.Mailings
             QueryParameters parameters = new QueryParameters();
             parameters.Add("page_index", pageIndex);
             parameters.Add("page_size", pageSize);
-            parameters.Add("scheduleTime", scheduleTime);
+            parameters.Add("scheduleTime", scheduleTime.ToString());
             parameters.Add("beforeSchedulingTime", beforeSchedulingTime);
             parameters.AddList("fields", fields);
             parameters = AddOrdering(parameters, order, orderBy);
