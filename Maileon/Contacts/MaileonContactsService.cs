@@ -351,7 +351,7 @@ namespace Maileon.Contacts
         /// <param name="field"></param>
         public void DeleteStandardFieldValues(StandardFieldNames field)
         {
-            Delete("contacts/fields/standard/" + HttpUtility.UrlEncode(MaileonEnums.GetValue(field)) + "/values");
+            Delete("contacts/fields/standard/" + HttpUtility.UrlEncode(MaileonEnums.ToXmlString(field)) + "/values");
         }
 
         /// <summary>
