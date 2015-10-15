@@ -5,9 +5,9 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maileon", "Maileon\Maileon.csproj", "{4C4ED148-2FB7-4323-BFC3-39D1C06735BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaileonTest", "MaileonTest\MaileonTest.csproj", "{9F4B52E0-219C-4FE4-8A2B-798ABDC3141B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaileonWebSample", "MaileonTest\MaileonWebSample.csproj", "{9F4B52E0-219C-4FE4-8A2B-798ABDC3141B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaileonTests", "MaileonTests\MaileonTests.csproj", "{1D0F0BB4-C995-4E71-9667-708458BE462F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaileonUnitTests", "MaileonTests\MaileonUnitTests.csproj", "{1D0F0BB4-C995-4E71-9667-708458BE462F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
