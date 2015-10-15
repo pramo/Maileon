@@ -18,9 +18,9 @@ namespace Maileon.Mailings
         [XmlArray("fields"), XmlArrayItem("field")]
         public List<MailingField> Fields { get; set; }
 
-        public string GetField(MailingFieldNames name)
+        public object GetField(MailingFieldNames name)
         {
-            return Fields.Find(field => field.Name == name).Value;
+            return Fields.Find(field => field.Name == name).GetValue();
         }
 
         public Mailing() { }
