@@ -40,13 +40,13 @@ namespace Maileon
         /// <param name="pageIndex">index of this page</param>
         /// <param name="pageSize">number of items on this page</param>
         /// <param name="countPages">number of pages</param>
-        public Page(int totalItems, int pageIndex, int pageSize, int countPages)
+        public Page(int pageIndex, int pageSize, int countPages, int totalItems)
         {
             this.Items = new List<T>();
             this.PageIndex = (pageIndex <= countPages) ? pageIndex : countPages;
             this.PageSize = pageSize;
-            this.TotalItems = totalItems;
             this.CountPages = countPages;
+            this.TotalItems = totalItems;
         }
 
         public Page() { }
