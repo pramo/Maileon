@@ -17,6 +17,10 @@ namespace Maileon.Mailings
         [XmlElement("value")]
         public string Value { get; set; }
 
+        /// <summary>
+        /// Returns the actual value of this field
+        /// </summary>
+        /// <returns></returns>
         public object GetValue()
         {
             switch (Name)
