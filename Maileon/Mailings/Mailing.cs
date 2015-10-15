@@ -10,7 +10,6 @@ namespace Maileon.Mailings
 {
     public class Mailing
     {
-        private static long serialVersionUID = 3475689503475638798L;
         [XmlElement("id")]
         public long Id;
         [XmlElement("fields")]

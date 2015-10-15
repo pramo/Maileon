@@ -25,6 +25,8 @@ namespace Maileon.Transactions
         [XmlEnum("timestamp")]
         Timestamp,
         [XmlEnum("json")]
-        Json
+        Json,
+        [XmlEnum("date")]
+        Date
     }
 }

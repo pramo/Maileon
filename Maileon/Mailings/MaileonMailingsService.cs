@@ -26,9 +26,22 @@ namespace Maileon.Mailings
         /// <returns>The ID of the newly created regular mailing</returns>
         public long CreateMailing(string name, string subject) 
         {
+            return CreateMailing(name, subject, MailingTypes.Regular);
+        }
+
+        /// <summary>
+        /// Creates a mailing and returns its id. The created mailing will include all the default settings of the account such as the default template, the default mailing list (target group), sender address etc...
+        /// </summary>
+        /// <param name="name">	Name of the mailing. The name must be unique within the account. The name length must be in the range from 3 to 64 and should only contain alphanumeric characters or spaces.</param>
+        /// <param name="subject">The subject of the mailing. The length of the subject must not exceed 255 characters. The subject is not allowed to be empty. ISO Control characters are forbidden in the subject.</param>
+        /// <param name="type">The type of the mailing</param>
+        /// <returns>The ID of the newly created mailing</returns>
+        public long CreateMailing(string name, string subject, MailingTypes type)
+        {
             QueryParameters parameters = new QueryParameters();
             parameters.Add("name", name);
             parameters.Add("subject", subject);
+            parameters.Add("type", type);
 
             ResponseWrapper response = Post("mailings", parameters, null);
             return SerializationUtils<long>.FromXmlString(response.Body, "mailing_id");
@@ -50,6 +63,17 @@ namespace Maileon.Mailings
         public void SendMailingNow(long mailingId) 
         {
             Post("mailings/" + mailingId.ToString() + "/sendnow", null);
+        }
+
+        /// <summary>
+        /// Returns the archive URL of the mailing with the given id.
+        /// </summary>
+        /// <param name="mailingId"></param>
+        /// <returns></returns>
+        public string GetArchiveUrl(long mailingId)
+        {
+            ResponseWrapper response = Get("mailings/" + mailingId.ToString() + "/archiveurl");
+            return response.Body;
         }
 
         /// <summary>
@@ -125,7 +149,7 @@ namespace Maileon.Mailings
         /// <returns></returns>
         public int GetArchivalDuration(long mailingId) 
         {
-            ResponseWrapper response = Get("mailings/" + mailingId.ToString() + "/archivalduration");
+            ResponseWrapper response = Get("mailings/" + mailingId.ToString() + "/settings/archivalduration");
             return SerializationUtils<int>.FromXmlString(response.Body, "archival_duration");
         }
 
@@ -136,7 +160,7 @@ namespace Maileon.Mailings
         /// <returns></returns>
         public int GetTrackingDuration(long mailingId) 
         {
-            ResponseWrapper response = Get("mailings/" + mailingId.ToString() + "/trackingduration");
+            ResponseWrapper response = Get("mailings/" + mailingId.ToString() + "/settings/trackingduration");
             return SerializationUtils<int>.FromXmlString(response.Body, "tracking_duration");
         }
 
@@ -147,7 +171,7 @@ namespace Maileon.Mailings
         /// <returns></returns>
         public int GetMaxAttachmentSize(long mailingId) 
         {
-            ResponseWrapper response = Get("mailings/" + mailingId.ToString() + "/maxattachmentsize");
+            ResponseWrapper response = Get("mailings/" + mailingId.ToString() + "/settings/maxattachmentsize");
             return SerializationUtils<int>.FromXmlString(response.Body, "max_attachment_size");
         }
 
@@ -158,7 +182,7 @@ namespace Maileon.Mailings
         /// <returns></returns>
         public int GetMaxContentSize(long mailingId) 
         {
-            ResponseWrapper response = Get("mailings/" + mailingId.ToString() + "/maxcontentsize");
+            ResponseWrapper response = Get("mailings/" + mailingId.ToString() + "/settings/maxcontentsize");
             return SerializationUtils<int>.FromXmlString(response.Body, "max_content_size");
         }
 
@@ -303,7 +327,7 @@ namespace Maileon.Mailings
         public long GetHtmlContentSize(long mailingId) 
         {
             ResponseWrapper response = Get("mailings/" + mailingId + "/contents/html/size");
-            return SerializationUtils<int>.FromXmlString(response.Body, "size");
+            return SerializationUtils<int>.FromXmlString(response.Body, "html_size");
         }
 
         /// <summary>
@@ -361,6 +385,32 @@ namespace Maileon.Mailings
         public void SetTextContent(long mailingId, string text) 
         {
             Post("mailings/" + mailingId + "/contents/text", null, "text/plain", text);
+        }
+
+        /// <summary>
+        /// Returns the settings for the reply-to address for this mailing.
+        /// </summary>
+        /// <param name="mailingId">the id of the mailing being queried</param>
+        /// <returns></returns>
+        public ReplyToAddress GetReplyToAddress(long mailingId)
+        {
+            ResponseWrapper response = Get("mailings/" + mailingId + "/settings/replyto");
+            return SerializationUtils<ReplyToAddress>.FromXmlString(response.Body);
+        }
+
+        /// <summary>
+        /// Update the settings for the reply-to address for this mailing.
+        /// </summary>
+        /// <param name="mailingId">the id of the mailing being changed</param>
+        /// <param name="replyTo">the replyto object</param>
+        public void SetReplyToAddress(long mailingId, ReplyToAddress replyTo)
+        {
+            QueryParameters parameters = new QueryParameters();
+            parameters.Add("active", replyTo.Active);
+            parameters.Add("auto", replyTo.Auto);
+            parameters.Add("customEmail", replyTo.CustomEmail);
+
+            Post("mailings/" + mailingId + "/settings/replyto", parameters, null);
         }
 
         /// <summary>
@@ -455,8 +505,8 @@ namespace Maileon.Mailings
             QueryParameters parameters = new QueryParameters();
             parameters.Add("format", format);
 
-            ResponseWrapper response = Get("mailings/" + mailingId + "/contents/links/trackable/count");
-            return SerializationUtils<int>.FromXmlString(response.Body, "count");
+            ResponseWrapper response = Get("mailings/" + mailingId + "/contents/links/trackable/count", parameters);
+            return SerializationUtils<int>.FromXmlString(response.Body, "count_trackable_links");
         }
 
         /// <summary>
@@ -878,6 +928,119 @@ namespace Maileon.Mailings
             return page;
 	    }
 
-    
+        /// <summary>
+        /// Returns the DOI key of the mailing with the provided id.
+        /// </summary>
+        /// <param name="mailingId"></param>
+        /// <returns></returns>
+        public string GetDoiMailingKey(long mailingId)
+        {
+            ResponseWrapper response = Get("mailings/" + mailingId + "/settings/doi_key");
+            return SerializationUtils<string>.FromXmlString(response.Body, "doi_key");
+        }
+
+        /// <summary>
+        /// Sets DOI key of the mailing with the provided id.
+        /// </summary>
+        /// <param name="mailingId"></param>
+        /// <param name="name"></param>
+        public void SetDoiMailingKey(long mailingId, string name)
+        {
+            string body = SerializationUtils<string>.ToXmlString(name, "doi_key");
+            Post("mailings/" + mailingId + "/settings/doi_key", null, body);
+        }
+
+        /// <summary>
+        /// Create a new scheduling for a given mailing, using the given date.
+        /// </summary>
+        /// <param name="mailingId"></param>
+        /// <param name="time"></param>
+        public void CreateSchedule(long mailingId, Schedule schedule)
+        {
+            QueryParameters parameters = new QueryParameters();
+            parameters.Add("date", schedule.Date);
+            parameters.Add("hour", schedule.Hours);
+            parameters.Add("minutes", schedule.Minutes);
+
+            Put("mailings/" + mailingId + "/schedule", parameters, null);
+        }
+
+        /// <summary>
+        /// Returns the scheduling resource of the mailing with the provided id.
+        /// </summary>
+        /// <param name="mailingId"></param>
+        /// <returns></returns>
+        public Schedule GetSchedule(long mailingId)
+        {
+            ResponseWrapper response = Get("mailings/" + mailingId + "/schedule");
+            return SerializationUtils<Schedule>.FromXmlString(response.Body);
+        }
+
+        /// <summary>
+        /// Update the current scheduling for a given mailing, using the given date.
+        /// </summary>
+        /// <param name="mailingId"></param>
+        /// <returns></returns>
+        public void UpdateSchedule(long mailingId, Schedule schedule)
+        {
+            QueryParameters parameters = new QueryParameters();
+            parameters.Add("date", schedule.Date);
+            parameters.Add("hour", schedule.Hours);
+            parameters.Add("minutes", schedule.Minutes);
+
+            Post("mailings/" + mailingId + "/schedule", parameters, null);
+        }
+
+        /// <summary>
+        /// Delete the current schedule for a given mailing.
+        /// </summary>
+        /// <param name="mailingId"></param>
+        /// <returns></returns>
+        public void DeleteSchedule(long mailingId)
+        {
+            Delete("mailings/" + mailingId + "/schedule");
+        }
+
+        /// <summary>
+        /// Create the trigger dispatching information for a given mailing. This method needs to be called before activating a trigger mailing.
+        /// </summary>
+        /// <param name="mailingId"></param>
+        /// <param name="options"></param>
+        public void CreateTriggerDispatch(long mailingId, TriggerDispatchOptions options)
+        {
+            string body = SerializationUtils<TriggerDispatchOptions>.ToXmlString(options);
+            Put("mailings/" + mailingId + "/dispatching", body);
+        }
+
+        /// <summary>
+        /// Get the dispatching information for a given trigger mailing.
+        /// </summary>
+        /// <param name="mailingId"></param>
+        /// <returns></returns>
+        public TriggerDispatchOptions GetTriggerDispatch(long mailingId)
+        {
+            ResponseWrapper response = Get("mailings/" + mailingId + "/dispatching");
+            return SerializationUtils<TriggerDispatchOptions>.FromXmlString(response.Body);
+        }
+
+        /// <summary>
+        /// This method activates a draft trigger mailing. It requires a valid dispatch plan to be set. 
+        /// Please note, when setting the dispatching information, you can also instantly activate the trigger by setting StartTrigger to true
+        /// </summary>
+        /// <param name="mailingId"></param>
+        public void ActivateTriggerDispatch(long mailingId)
+        {
+            Post("mailings/" + mailingId + "/dispatching/activate", null);
+        }
+
+        /// <summary>
+        /// Once a trigger mailing is active (state = ‘sealed’) it cannot be deleted by using the usual ‘delete Mailing‘ method. 
+        /// Instead this method will deactivate the trigger and remove the mailing from the active trigger mailings.
+        /// </summary>
+        /// <param name="mailingId"></param>
+        public void DeleteTriggerDispatch(long mailingId)
+        {
+            Delete("mailings/" + mailingId + "/dispatching");
+        }
     }
 }

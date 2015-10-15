@@ -12,7 +12,7 @@ namespace Maileon.Mailings
     /// A class for wrapping a list of personalizations
     /// </summary>
     [XmlRoot("personalizations")]
-    internal class PersonalizationCollection
+    public class PersonalizationCollection
     {
         public PersonalizationCollection() { Items = new List<Personalization>(); }
         public PersonalizationCollection(List<Personalization> items) { Items = items; }

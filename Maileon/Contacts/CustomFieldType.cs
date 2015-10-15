@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 using System.Xml.Serialization;
 
-namespace Maileon.Utils.Serialization.Contacts
+namespace Maileon.Contacts
 {
-    public enum XmlCustomFieldType
+    public enum CustomFieldType
     {
         [XmlEnum("string")]
         String,

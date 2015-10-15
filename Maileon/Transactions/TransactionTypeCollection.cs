@@ -11,7 +11,7 @@ namespace Maileon.Transactions
     /// A class for wrapping a list of contacts
     /// </summary>
     [XmlRoot("transaction_types")]
-    internal class TransactionTypeCollection
+    public class TransactionTypeCollection
     {
         public TransactionTypeCollection() { Items = new List<TransactionType>(); }
         public TransactionTypeCollection(List<TransactionType> items) { Items = items; }

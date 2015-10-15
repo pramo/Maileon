@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 using System.Xml.Serialization;
 
-namespace Maileon.Utils.Serialization.Contacts
+namespace Maileon.Contacts
 {
     /// <summary>
     /// A class for wrapping a maileon contact field definition
     /// </summary>
     [XmlRoot("custom_field")]
-    public class XmlCustomFieldDefinition
+    public class CustomFieldDefinition
     {
         /// <summary>
         /// The name of this custom field
@@ -23,10 +23,10 @@ namespace Maileon.Utils.Serialization.Contacts
         /// The type of this custom field
         /// </summary>
         [XmlElement("type")]
-	    public XmlCustomFieldType Type { get; set; }
+	    public CustomFieldType Type { get; set; }
 
-	    public XmlCustomFieldDefinition() { }
-        public XmlCustomFieldDefinition(string name, XmlCustomFieldType type)
+	    public CustomFieldDefinition() { }
+        public CustomFieldDefinition(string name, CustomFieldType type)
         {
 		    this.Name = name;
 		    this.Type = type;

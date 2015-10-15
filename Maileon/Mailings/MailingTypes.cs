@@ -15,6 +15,6 @@ namespace Maileon.Mailings
         [XmlEnum("regular")]
         Regular,
         [XmlEnum("trigger")]
-        trigger
+        Trigger
     }
 }

@@ -1,0 +1,30 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="MaileonTests.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="baseUri" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://api.maileon.com/1.0/</Value>
+    </Setting>
+    <Setting Name="apiKey" Type="System.String" Scope="User">
+      <Value Profile="(Default)">5896e6bf-752b-4db3-955e-c24fc0479bd1</Value>
+    </Setting>
+    <Setting Name="mailingIdToDelete" Type="System.Int64" Scope="User">
+      <Value Profile="(Default)">1548</Value>
+    </Setting>
+    <Setting Name="mailingIdToSend" Type="System.Int64" Scope="User">
+      <Value Profile="(Default)">1548</Value>
+    </Setting>
+    <Setting Name="mailingIdExistingRegular" Type="System.Int64" Scope="User">
+      <Value Profile="(Default)">2665</Value>
+    </Setting>
+    <Setting Name="mailingIdExistingTrigger" Type="System.Int64" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="mailingIdExistingDoi" Type="System.Int64" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="mailingIdArchived" Type="System.Int64" Scope="User">
+      <Value Profile="(Default)">2665</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

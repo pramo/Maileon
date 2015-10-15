@@ -88,12 +88,22 @@ namespace Maileon.Transactions
         }
 
         /// <summary>
+        /// Creates a transaction in the account
+        /// </summary>
+        /// <param name="transactions">the transactions to create</param>
+        /// <returns>a transaction processing report</returns>
+        public TransactionProcessingReport CreateTransaction(Transaction transaction)
+        {
+            return CreateTransaction(transaction, true, true);
+        }
+
+        /// <summary>
         /// Creates any number of transactions in the account
         /// </summary>
         /// <param name="transactions">the transactions to create</param>
         /// <param name="release">whether the transaction should be released instantly</param>
         /// <param name="ignoreInvalidTransactions">if set to false invalid contacts will throw exceptions</param>
-        /// <returns>a list of transaction rpcessing reports</returns>
+        /// <returns>a list of transaction processing reports</returns>
         public List<TransactionProcessingReport> CreateTransactions(List<Transaction> transactions, bool release, bool ignoreInvalidTransactions) 
         {
             QueryParameters parameters = new QueryParameters();
@@ -103,6 +113,16 @@ namespace Maileon.Transactions
             ResponseWrapper response = Post("transactions", parameters, MAILEON_JSON_TYPE, SerializationUtils<List<Transaction>>.ToJsonString(transactions));
 
             return SerializationUtils<TransactionProcessingReports>.FromJsonString(response.Body);
+        }
+
+        /// <summary>
+        /// Creates any number of transactions in the account
+        /// </summary>
+        /// <param name="transactions">the transactions to create</param>
+        /// <returns>a list of transaction processing reports</returns>
+        public List<TransactionProcessingReport> CreateTransactions(List<Transaction> transactions)
+        {
+            return CreateTransactions(transactions, true, true);
         }
 
         /// <summary>
@@ -116,6 +136,21 @@ namespace Maileon.Transactions
             parameters.Add("type_id", typeId);
             parameters.Add("before_timestamp", beforeTimestamp);
             Delete("transactions", parameters);
+        }
+
+        public long FindTransactionTypeIdByName(string name)
+        {
+            //FIXME: more than 1000 transactions
+            Page<TransactionType> page = GetTransactionTypes(1, 1000);
+            foreach(TransactionType type in page.Items)
+            {
+                if(type.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    return type.Id;
+                }
+            }
+
+            throw new MaileonClientException(string.Format("there is no type named '{0}'", name));
         }
     }
 }

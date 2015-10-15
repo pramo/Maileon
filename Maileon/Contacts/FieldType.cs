@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 using System.Xml.Serialization;
 
-namespace Maileon.Utils.Serialization.Contacts
+namespace Maileon.Contacts
 {
-    public enum XmlFieldType
+    public enum FieldType
     {
         [XmlEnum("standard")]
         Standard,

@@ -39,7 +39,7 @@ namespace Maileon.Contacts
         /// </summary>
         /// <param name="contact">the contact</param>
         /// <param name="syncMode">the maileon synchronization mode</param>
-        public void CreateContact(Contact contact, SynchronizationModes syncMode)
+        public void CreateContact(Contact contact, SynchronizationMode syncMode)
         {
             CreateContact(contact, syncMode, null, null, false, false, null);
         }
@@ -56,7 +56,7 @@ namespace Maileon.Contacts
         /// <param name="reimportUnsubscribedContacts">If set to true unsubscribed contacts will be reimported, else, they will be ignored.</param>
         /// <param name="updateOnly">If set to true only existing contacts will be updated. Not existing contacts will not be created.</param>
         /// <returns></returns>
-        public SynchronizationReport SynchronizeContacts(List<Contact> contacts, Permissions permission, SynchronizationModes syncMode, bool useExternalId, bool ignoreInvalidContacts, bool overridePermission, bool reimportUnsubscribedContacts, bool updateOnly)
+        public SynchronizationReport SynchronizeContacts(List<Contact> contacts, Permissions permission, SynchronizationMode syncMode, bool useExternalId, bool ignoreInvalidContacts, bool overridePermission, bool reimportUnsubscribedContacts, bool updateOnly)
         {
             if (contacts == null) 
             {
@@ -76,7 +76,7 @@ namespace Maileon.Contacts
             parameters.Add("reimport_unsubscribed_contacts", reimportUnsubscribedContacts);
             parameters.Add("update_only", updateOnly);
 
-            ResponseWrapper response = Post("contacts", parameters, SerializationUtils<XmlContactCollection>.ToXmlString(contacts));
+            ResponseWrapper response = Post("contacts", parameters, SerializationUtils<ContactCollection>.ToXmlString(contacts));
             return SerializationUtils<SynchronizationReport>.FromXmlString(response.Body);
         }
 
@@ -90,7 +90,7 @@ namespace Maileon.Contacts
         /// <param name="doi">the doi</param>
         /// <param name="doiPlus">the doi plus</param>
         /// <param name="doiMailingKey">the doi mailing key</param>
-        public void CreateContact(Contact contact, XmlSynchronizationMode syncMode, string src, string subscriptionPage, bool doi, bool doiPlus, string doiMailingKey) 
+        public void CreateContact(Contact contact, SynchronizationMode syncMode, string src, string subscriptionPage, bool doi, bool doiPlus, string doiMailingKey) 
         {
             if (contact == null) 
             {
@@ -114,7 +114,7 @@ namespace Maileon.Contacts
             contact.PermissionSpecified = false;
             contact.SerializeAnonymousSpecified = false;
 
-            string xml = SerializationUtils<XmlContact>.ToXmlString(contact);
+            string xml = SerializationUtils<Contact>.ToXmlString(contact);
             Post("contacts/" + HttpUtility.UrlEncode(contact.Email), parameters, xml);
         }
 
@@ -126,7 +126,7 @@ namespace Maileon.Contacts
         /// <param name="pageIndex">the idnex of the page</param>
         /// <param name="pageSize">the number of items on the page</param>
         /// <returns>a page of contacts</returns>
-        public Page<XmlContact> GetContacts(List<XmlStandardFieldNames> standardFields, List<string> customFields, int pageIndex, int pageSize)
+        public Page<Contact> GetContacts(List<StandardFieldNames> standardFields, List<string> customFields, int pageIndex, int pageSize)
         {
             ValidatePaginationParameters(pageIndex, pageSize);
 
@@ -137,8 +137,8 @@ namespace Maileon.Contacts
             parameters.AddList("custom_field", customFields);
 
             ResponseWrapper response = Get("contacts", parameters);
-            Page<XmlContact> page = new Page<XmlContact>(pageIndex, pageSize, response);
-            page.Items = SerializationUtils<XmlContactCollection>.FromXmlString(response.Body);
+            Page<Contact> page = new Page<Contact>(pageIndex, pageSize, response);
+            page.Items = SerializationUtils<ContactCollection>.FromXmlString(response.Body);
             
             return page;
         }
@@ -152,7 +152,7 @@ namespace Maileon.Contacts
         /// <param name="pageIndex">the page index</param>
         /// <param name="pageSize">the page size</param>
         /// <returns>a page of contacts</returns>
-        public Page<XmlContact> GetContactsByFilterId(long contactFilterId, List<XmlStandardFieldNames> standardFields, List<string> customFields, int pageIndex, int pageSize) 
+        public Page<Contact> GetContactsByFilterId(long contactFilterId, List<StandardFieldNames> standardFields, List<string> customFields, int pageIndex, int pageSize) 
         {
             QueryParameters parameters = new QueryParameters();
             parameters.Add("page_index", pageIndex);
@@ -161,8 +161,8 @@ namespace Maileon.Contacts
             parameters.AddList("custom_field", customFields);
 
             ResponseWrapper response = Get("contacts/filter/" + contactFilterId, parameters);
-            Page<XmlContact> page = new Page<XmlContact>(pageIndex, pageSize, response);
-            page.Items = SerializationUtils<XmlContactCollection>.FromXmlString(response.Body);
+            Page<Contact> page = new Page<Contact>(pageIndex, pageSize, response);
+            page.Items = SerializationUtils<ContactCollection>.FromXmlString(response.Body);
             return page;
         }
 
@@ -173,14 +173,14 @@ namespace Maileon.Contacts
         /// <param name="standardFields">the standard fields</param>
         /// <param name="customFields">the custom fields</param>
         /// <returns>a contact</returns>
-        public XmlContact GetContact(String email, List<XmlStandardFieldNames> standardFields, List<String> customFields) 
+        public Contact GetContact(String email, List<StandardFieldNames> standardFields, List<String> customFields) 
         {
             QueryParameters parameters = new QueryParameters();
             parameters.AddList("standard_field", standardFields);
             parameters.AddList("custom_field", customFields);
 
             ResponseWrapper response = Get("contacts/" + HttpUtility.UrlEncode(email), parameters);
-            return SerializationUtils<XmlContact>.FromXmlString(response.Body);
+            return SerializationUtils<Contact>.FromXmlString(response.Body);
         }
 
         /// <summary>
@@ -191,7 +191,7 @@ namespace Maileon.Contacts
         /// <param name="standardFields">the standard fields</param>
         /// <param name="customFields">the custom fields</param>
         /// <returns>a contact</returns>
-        public XmlContact GetContact(long id, string checksum, List<XmlStandardFieldNames> standardFields, List<string> customFields)
+        public Contact GetContact(long id, string checksum, List<StandardFieldNames> standardFields, List<string> customFields)
         {
             QueryParameters parameters = new QueryParameters();
             parameters.Add("id", id);
@@ -200,7 +200,7 @@ namespace Maileon.Contacts
             parameters.AddList("custom_field", customFields);
 
             ResponseWrapper response = Get("contacts/contact", parameters);
-            return SerializationUtils<XmlContact>.FromXmlString(response.Body);
+            return SerializationUtils<Contact>.FromXmlString(response.Body);
         }
 
         /// <summary>
@@ -210,14 +210,14 @@ namespace Maileon.Contacts
         /// <param name="standardFields">the standard fields</param>
         /// <param name="customFields">the custom fields</param>
         /// <returns>a list of contacts</returns>
-        public List<XmlContact> GetContactsByExternalId(string externalId, List<XmlStandardFieldNames> standardFields, List<string> customFields)
+        public List<Contact> GetContactsByExternalId(string externalId, List<StandardFieldNames> standardFields, List<string> customFields)
         {
             QueryParameters parameters = new QueryParameters();
             parameters.AddList("standard_field", standardFields);
             parameters.AddList("custom_field", customFields);
 
             ResponseWrapper response = Get("contacts/externalid/" + HttpUtility.UrlEncode(externalId), parameters);
-            return SerializationUtils<XmlContactCollection>.FromXmlString(response.Body);
+            return SerializationUtils<ContactCollection>.FromXmlString(response.Body);
         }
 
         /// <summary>
@@ -230,7 +230,7 @@ namespace Maileon.Contacts
         /// <param name="pageKey">In case where this method was called by a landing page such as a profile update page, this string offers the possibility to keep track of it for use in reports related to doi processes</param>
         /// <param name="doiMailingKey">This parameter is ignored if triggerdoi is not provided or false. References the doi mailing to be used. If not provided, the default doi mailing will be used</param>
         /// <param name="ignoreChecksum">If this flag is set to true, the method will ignore the checksum. This flag should only be set when the call is not issued by a customer directly but by a third party application. </param>
-        public void UpdateContact(XmlContact contact, string checksum, bool triggerDoi, string src, string pageKey, string doiMailingKey, bool ignoreChecksum) 
+        public void UpdateContact(Contact contact, string checksum, bool triggerDoi, string src, string pageKey, string doiMailingKey, bool ignoreChecksum) 
         {
             if (contact.Id == null) 
             {
@@ -252,7 +252,7 @@ namespace Maileon.Contacts
             contact.ExternalIdSpecified = false;
             contact.PermissionSpecified = false;
 
-            Put("contacts/contact", parameters, SerializationUtils<XmlContact>.ToXmlString(contact));
+            Put("contacts/contact", parameters, SerializationUtils<Contact>.ToXmlString(contact));
         }
 
         /// <summary>
@@ -290,7 +290,7 @@ namespace Maileon.Contacts
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <returns>a page of blocked contacts</returns>
-        public Page<XmlBlockedContact> GetBlockedContacts(List<XmlStandardFieldNames> standardFields, List<string> customFields, int pageIndex, int pageSize) 
+        public Page<BlockedContact> GetBlockedContacts(List<StandardFieldNames> standardFields, List<string> customFields, int pageIndex, int pageSize) 
         {
             ValidatePaginationParameters(pageIndex, pageSize);
 
@@ -301,8 +301,8 @@ namespace Maileon.Contacts
             parameters.AddList("custom_field", customFields);
 
             ResponseWrapper response = Get("contacts/blocked", parameters);
-            Page<XmlBlockedContact> page = new Page<XmlBlockedContact>(pageIndex, pageSize, response);
-            page.Items = SerializationUtils<XmlBlockedContactCollection>.FromXmlString(response.Body);
+            Page<BlockedContact> page = new Page<BlockedContact>(pageIndex, pageSize, response);
+            page.Items = SerializationUtils<BlockedContactCollection>.FromXmlString(response.Body);
 
             return page;
         }
@@ -313,7 +313,7 @@ namespace Maileon.Contacts
         /// Returns the contact field backup instruction that are available in the account.
         /// </summary>
         /// <returns></returns>
-        public List<XmlFieldBackupInstruction> GetFieldBackupInstructions() 
+        public List<FieldBackupInstruction> GetFieldBackupInstructions() 
         {
             ResponseWrapper response = Get("contacts/backup");
             return SerializationUtils<FieldBackupInstructionCollection>.FromXmlString(response.Body);
@@ -323,9 +323,9 @@ namespace Maileon.Contacts
         /// By setting contact field backup instructions, Maileon is told to backup the values of indicated contact fields used in mailings and to map them to the mailings. This feature is expensive in terms of storage and should only be used for those contact fields that are expected to be frequently updated and that are relevant for reports.
         /// </summary>
         /// <param name="fbi"></param>
-        public void CreateFieldBackupInstruction(XmlFieldBackupInstruction fbi) 
+        public void CreateFieldBackupInstruction(FieldBackupInstruction fbi) 
         {
-            Post("contacts/backup", SerializationUtils<XmlFieldBackupInstruction>.ToXmlString(fbi));
+            Post("contacts/backup", SerializationUtils<FieldBackupInstruction>.ToXmlString(fbi));
         }
 
         /// <summary>
@@ -349,7 +349,7 @@ namespace Maileon.Contacts
         /// Deletes the values of the given standard contact field for all contacts.
         /// </summary>
         /// <param name="field"></param>
-        public void DeleteStandardFieldValues(XmlStandardFieldNames field)
+        public void DeleteStandardFieldValues(StandardFieldNames field)
         {
             Delete("contacts/fields/standard/" + HttpUtility.UrlEncode(MaileonEnums.GetValue(field)) + "/values");
         }
@@ -370,14 +370,14 @@ namespace Maileon.Contacts
         /// <param name="standardFields"></param>
         /// <param name="customFields"></param>
         /// <returns></returns>
-        public List<XmlContact> GetContactsByEmail(string email, List<XmlStandardFieldNames> standardFields, List<string> customFields) 
+        public List<Contact> GetContactsByEmail(string email, List<StandardFieldNames> standardFields, List<string> customFields) 
         {
             QueryParameters parameters = new QueryParameters();
             parameters.AddList("standard_field", standardFields);
             parameters.AddList("custom_field", customFields);
 
             ResponseWrapper response = Get("contacts/email/" + HttpUtility.UrlEncode(email), parameters);
-            return SerializationUtils<XmlContactCollection>.FromXmlString(response.Body);
+            return SerializationUtils<ContactCollection>.FromXmlString(response.Body);
         }
 
         /// <summary>
@@ -392,10 +392,10 @@ namespace Maileon.Contacts
         /// Gets the custom fields
         /// </summary>
         /// <returns>a list of custom fields</returns>
-        public List<XmlCustomFieldDefinition> GetCustomFields()
+        public List<CustomFieldDefinition> GetCustomFields()
         {
             ResponseWrapper resp = Get("contacts/fields/custom");
-            return SerializationUtils<XmlCustomFieldDefinitionCollection>.FromXmlString(resp.Body);
+            return SerializationUtils<CustomFieldDefinitionCollection>.FromXmlString(resp.Body);
         }
 
         /// <summary>
@@ -403,7 +403,7 @@ namespace Maileon.Contacts
         /// </summary>
         /// <param name="name">the name of the field</param>
         /// <param name="type">the type of the field</param>
-        public void CreateCustomField(string name, XmlCustomFieldType type) 
+        public void CreateCustomField(string name, CustomFieldType type) 
         {
             QueryParameters parameters = new QueryParameters();
             parameters.Add("type", type);

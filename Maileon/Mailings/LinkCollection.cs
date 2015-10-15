@@ -12,7 +12,7 @@ namespace Maileon.Mailings
     /// A class for wrapping a list of links
     /// </summary>
     [XmlRoot("links")]
-    internal class LinkCollection
+    public class LinkCollection
     {
         public LinkCollection() { Items = new List<Link>(); }
         public LinkCollection(List<Link> items) { Items = items; }

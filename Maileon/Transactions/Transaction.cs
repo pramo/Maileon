@@ -27,7 +27,7 @@ namespace Maileon.Transactions
         /// The type id of this transaction
         /// </summary>
         [MaileonJsonAttribute("type")]
-        public int Type { get; set; }
+        public long Type { get; set; }
 
         /// <summary>
         /// The content of this transaction

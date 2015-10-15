@@ -25,9 +25,9 @@ namespace Maileon.Mailings
         [XmlElement("occurs_in_conditional_content")]
         public bool OccursInConditionalContent { get; set; }
         [XmlElement("conditional_content_ruleid")]
-        public long ConditionalContentRuleId { get; set; }
+        public NullableValue<long> ConditionalContentRuleId { get; set; }
         [XmlElement("conditional_content_rulesetid")]
-        public long ConditionalContentRulesetId { get; set; }
+        public NullableValue<long> ConditionalContentRulesetId { get; set; }
         [XmlElement("event_type")]
         public string EventType { get; set; }
         [XmlElement("option_name")]
