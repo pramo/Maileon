@@ -53,7 +53,31 @@ namespace Maileon.Utils
         /// <returns>this query</returns>
         public QueryParameters Add(string name, MailingTypes value)
         {
-            this.Add(new KeyValuePair<string, string>(name, MaileonEnums.GetValue(value)));
+            this.Add(new KeyValuePair<string, string>(name, MaileonEnums.ToXmlString(value)));
+            return this;
+        }
+
+        /// <summary>
+        /// Add a single parameter to the query
+        /// </summary>
+        /// <param name="name">the name of the parameter</param>
+        /// <param name="value">the value of the parameter</param>
+        /// <returns>this query</returns>
+        public QueryParameters Add(string name, MailingFieldNames value)
+        {
+            this.Add(new KeyValuePair<string, string>(name, MaileonEnums.ToXmlString(value)));
+            return this;
+        }
+
+        /// <summary>
+        /// Add a single parameter to the query
+        /// </summary>
+        /// <param name="name">the name of the parameter</param>
+        /// <param name="value">the value of the parameter</param>
+        /// <returns>this query</returns>
+        public QueryParameters Add(string name, Order value)
+        {
+            this.Add(new KeyValuePair<string, string>(name, MaileonEnums.ToXmlString(value)));
             return this;
         }
 
@@ -65,7 +89,7 @@ namespace Maileon.Utils
         /// <returns>this query</returns>
         public QueryParameters Add(string name, CustomFieldType value)
         {
-            this.Add(new KeyValuePair<string, string>(name, MaileonEnums.GetValue(value)));
+            this.Add(new KeyValuePair<string, string>(name, MaileonEnums.ToXmlString(value)));
             return this;
         }
 
@@ -119,7 +143,7 @@ namespace Maileon.Utils
         {
             if (value.HasValue)
             {
-                this.Add(new KeyValuePair<string, string>(name, MaileonEnums.GetValue(value.Value)));
+                this.Add(new KeyValuePair<string, string>(name, MaileonEnums.ToXmlString(value.Value)));
             }
             return this;
         }
@@ -134,7 +158,7 @@ namespace Maileon.Utils
         {
             if (value.HasValue)
             {
-                this.Add(new KeyValuePair<string, string>(name, MaileonEnums.GetValue(value.Value)));
+                this.Add(new KeyValuePair<string, string>(name, MaileonEnums.ToXmlString(value.Value)));
             }
             return this;
         }
@@ -149,7 +173,7 @@ namespace Maileon.Utils
         {
             if (value.HasValue)
             {
-                this.Add(new KeyValuePair<string, string>(name, MaileonEnums.GetValue(value.Value)));
+                this.Add(new KeyValuePair<string, string>(name, MaileonEnums.ToXmlString(value.Value)));
             }
             return this;
         }
@@ -164,7 +188,7 @@ namespace Maileon.Utils
         {
             if (value.HasValue)
             {
-                this.Add(new KeyValuePair<string, string>(name, MaileonEnums.GetValue(value.Value)));
+                this.Add(new KeyValuePair<string, string>(name, MaileonEnums.ToXmlString(value.Value)));
             }
             return this;
         }
@@ -179,7 +203,7 @@ namespace Maileon.Utils
         {
             if (value.HasValue)
             {
-                this.Add(new KeyValuePair<string, string>(name, MaileonEnums.GetValue(value.Value)));
+                this.Add(new KeyValuePair<string, string>(name, MaileonEnums.ToXmlString(value.Value)));
             }
             return this;
         }
@@ -194,7 +218,7 @@ namespace Maileon.Utils
         {
             if (value.HasValue)
             {
-                this.Add(new KeyValuePair<string, string>(name, MaileonEnums.GetValue(value.Value)));
+                this.Add(new KeyValuePair<string, string>(name, MaileonEnums.ToXmlString(value.Value)));
             }
             return this;
         }
@@ -209,7 +233,7 @@ namespace Maileon.Utils
         {
             if (value.HasValue)
             {
-                this.Add(new KeyValuePair<string, string>(name, MaileonEnums.GetValue(value.Value)));
+                this.Add(new KeyValuePair<string, string>(name, MaileonEnums.ToXmlString(value.Value)));
             }
             return this;
         }
@@ -252,7 +276,7 @@ namespace Maileon.Utils
             if (values == null) return this;
             foreach (SocialNetwork elem in values)
             {
-                this.Add(name, MaileonEnums.GetValue(elem));
+                this.Add(name, MaileonEnums.ToXmlString(elem));
             }
             return this;
         }
@@ -268,7 +292,7 @@ namespace Maileon.Utils
             if (values == null) return this;
             foreach (MailingFieldNames elem in values)
             {
-                this.Add(name, MaileonEnums.GetValue(elem));
+                this.Add(name, MaileonEnums.ToXmlString(elem));
             }
             return this;
         }
@@ -284,7 +308,7 @@ namespace Maileon.Utils
             if (values == null) return this;
             foreach (MailingTypes elem in values)
             {
-                this.Add(name, MaileonEnums.GetValue(elem));
+                this.Add(name, MaileonEnums.ToXmlString(elem));
             }
             return this;
         }
@@ -300,7 +324,7 @@ namespace Maileon.Utils
             if (values == null) return this;
             foreach (MailingStates elem in values)
             {
-                this.Add(name, MaileonEnums.GetValue(elem));
+                this.Add(name, MaileonEnums.ToXmlString(elem));
             }
             return this;
         }
@@ -332,7 +356,7 @@ namespace Maileon.Utils
             if (values == null) return this;
             foreach (StandardFieldNames elem in values)
             {
-                this.Add(name, MaileonEnums.GetValue(elem));
+                this.Add(name, MaileonEnums.ToXmlString(elem));
             }
             return this;
         }
@@ -348,7 +372,7 @@ namespace Maileon.Utils
             if (values == null) return this;
             foreach (BlockReason elem in values)
             {
-                this.Add(name, MaileonEnums.GetValue(elem));
+                this.Add(name, MaileonEnums.ToXmlString(elem));
             }
             return this;
         }
@@ -364,7 +388,7 @@ namespace Maileon.Utils
             if (values == null) return this;
             foreach (DeviceType elem in values)
             {
-                this.Add(name, MaileonEnums.GetValue(elem));
+                this.Add(name, MaileonEnums.ToXmlString(elem));
             }
             return this;
         }
@@ -380,7 +404,7 @@ namespace Maileon.Utils
             if (values == null) return this;
             foreach (MailingFormat elem in values)
             {
-                this.Add(name, MaileonEnums.GetValue(elem));
+                this.Add(name, MaileonEnums.ToXmlString(elem));
             }
             return this;
         }
