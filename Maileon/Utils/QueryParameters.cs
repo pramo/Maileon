@@ -279,6 +279,22 @@ namespace Maileon.Utils
         /// <param name="name"></param>
         /// <param name="values"></param>
         /// <returns></returns>
+        public QueryParameters AddList(string name, List<MailingTypes> values)
+        {
+            if (values == null) return this;
+            foreach (MailingTypes elem in values)
+            {
+                this.Add(name, MaileonEnums.GetValue(elem));
+            }
+            return this;
+        }
+
+        /// <summary>
+        /// Adds a list of string parameters to the query
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="values"></param>
+        /// <returns></returns>
         public QueryParameters AddList(string name, List<MailingStates> values)
         {
             if (values == null) return this;

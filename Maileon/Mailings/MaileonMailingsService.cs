@@ -44,7 +44,7 @@ namespace Maileon.Mailings
             parameters.Add("type", type);
 
             ResponseWrapper response = Post("mailings", parameters, null);
-            return SerializationUtils<long>.FromXmlString(response.Body, "mailing_id");
+            return SerializationUtils<long>.FromXmlString(response.Body, "id");
         }
 
         /// <summary>
@@ -808,7 +808,7 @@ namespace Maileon.Mailings
             parameters.Add("page_index", pageIndex);
             parameters.Add("page_size", pageSize);
             parameters.AddList("fields", fields);
-            parameters.AddList("types", fields);
+            parameters.AddList("types", types);
 
             ResponseWrapper response = Get("mailings/filter/types", parameters);
 

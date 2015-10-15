@@ -12,7 +12,7 @@ namespace Maileon.Mailings
     /// A class for wrapping a list of attachments
     /// </summary>
     [XmlRoot("mailings")]
-    internal class MailingCollection
+    public class MailingCollection
     {
         public MailingCollection() { Items = new List<Mailing>(); }
         public MailingCollection(List<Mailing> items) { Items = items; }
