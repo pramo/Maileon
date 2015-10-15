@@ -40,11 +40,11 @@ namespace Maileon.Utils
         /// Returns the milliseconds passed since the UNIX epoch (Java long time)
         /// </summary>
         [XmlIgnore]
-        public long TimeInMillis
+        public double TimeInMillis
         {
             get
             {
-                return (long)unixEpoch.Subtract(this.DateTime).TotalMilliseconds;
+                return DateTime.Subtract(unixEpoch).TotalMilliseconds;
             }
             private set { }
         }
