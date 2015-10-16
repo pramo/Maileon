@@ -9,7 +9,7 @@ using System.Xml.Serialization;
 namespace Maileon.Contacts
 {
     /// <summary>
-    /// A calss representing an invalid contact
+    /// A class representing an invalid contact
     /// </summary>
     public class InvalidContact : Contact
     {
