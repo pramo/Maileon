@@ -50,9 +50,10 @@ namespace Maileon.Transactions
         /// Creates a new transaction type
         /// </summary>
         /// <param name="type">the transaction type to create</param>
-        public void CreateTransactionType(TransactionType type) 
+        public long CreateTransactionType(TransactionType type) 
         {
-            Post("transactions/types", SerializationUtils<TransactionType>.ToXmlString(type));
+            ResponseWrapper response = Post("transactions/types", SerializationUtils<TransactionType>.ToXmlString(type));
+            return SerializationUtils<long>.FromXmlString(response.Body, "transaction_type_id");
         }
 
         /// <summary>
@@ -126,7 +127,7 @@ namespace Maileon.Transactions
         }
 
         /// <summary>
-        /// Delete all transactions of a given type before a given date in the account. Any previously-released transactions will be ignored.
+        /// Delete all transactions of a given type before a given date in the account.
         /// </summary>
         /// <param name="typeId">the type id of the transaction</param>
         /// <param name="beforeTimestamp">the timestamp to compare against</param>
@@ -138,16 +139,38 @@ namespace Maileon.Transactions
             Delete("transactions", parameters);
         }
 
+        /// <summary>
+        /// Delete all transactions of a given type.
+        /// </summary>
+        /// <param name="typeId">the type id of the transaction</param>
+        public void DeleteTransactions(long typeId)
+        {
+            QueryParameters parameters = new QueryParameters();
+            parameters.Add("type_id", typeId);
+            Delete("transactions", parameters);
+        }
+
+        /// <summary>
+        /// Finds the transaction type with the given name in the account
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public long FindTransactionTypeIdByName(string name)
         {
-            //FIXME: more than 1000 transactions
-            Page<TransactionType> page = GetTransactionTypes(1, 1000);
-            foreach(TransactionType type in page.Items)
+            int i = 1;
+            Page<TransactionType> page = GetTransactionTypes(i, 1000);
+
+            while(i < page.CountPages + 1)
             {
-                if(type.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase))
+                foreach (TransactionType type in page.Items)
                 {
-                    return type.Id;
+                    if (type.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        return type.Id.Value;
+                    }
                 }
+
+                page = GetTransactionTypes(i, 1000);
             }
 
             throw new MaileonClientException(string.Format("there is no type named '{0}'", name));

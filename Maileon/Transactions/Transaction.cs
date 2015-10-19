@@ -20,20 +20,29 @@ namespace Maileon.Transactions
         /// <summary>
         /// The contact identification
         /// </summary>
-        [MaileonJsonAttribute("contact")]
+        [MaileonJson("contact")]
         public ContactReference Contact { get; set; }
+
+        /// <summary>
+        /// Use this if the contact should be imported
+        /// </summary>
+        [MaileonJson("import")]
+        public ImportReference Import { get; set; }
 
         /// <summary>
         /// The type id of this transaction
         /// </summary>
-        [MaileonJsonAttribute("type")]
+        [MaileonJson("type")]
         public long Type { get; set; }
 
         /// <summary>
         /// The content of this transaction
         /// </summary>
-        [MaileonJsonAttribute("content")]
+        [MaileonJson("content")]
         public object Content { get; set; }
+
+        [MaileonJson("attachments")]
+        public List<Attachment> Attachments { get; set; }
 
         /// <summary>
         /// Sets the content of the transaction from raw JSON data
@@ -44,6 +53,12 @@ namespace Maileon.Transactions
             this.Content = SerializationUtils<object>.FromJsonString(json);
         }
 
-        public Transaction() { }
+        public void AddAttachment(Attachment attachment)
+        {
+            if (Attachments == null) Attachments = new List<Attachment>();
+            Attachments.Add(attachment);
+        }
+
+        public Transaction() { this.Import = new ImportReference(); this.Contact = new ContactReference(); }
     }
 }

@@ -17,7 +17,7 @@ namespace Maileon.Transactions
         /// The id of this type
         /// </summary>
         [XmlElement("id")]
-        public long Id { get; set; }
+        public long? Id { get; set; }
 
         /// <summary>
         /// The name of this type
@@ -31,8 +31,17 @@ namespace Maileon.Transactions
         [XmlArray("attributes"), XmlArrayItem("attribute")]
         public List<Attribute> Attributes { get; set; }
 
-        public TransactionType() { }
-        public TransactionType(string name) { this.Name = name; }
+        /// <summary>
+        /// Returns the attribute with the given name
+        /// </summary>
+        /// <returns></returns>
+        public Attribute GetAttribute(string name)
+        {
+            return Attributes.Find(attribute => attribute.Name == name);
+        }
+
+        public TransactionType() { this.Attributes = new List<Attribute>(); }
+        public TransactionType(string name) : this() { this.Name = name;  }
 
         public override string ToString()
         {
