@@ -242,7 +242,7 @@ namespace Maileon.Mailings
             parameters.Add("format", format);
 
             ResponseWrapper response = Get("mailings/" + mailingId + "/contents/doiconfirmationlinks/count", parameters);
-            return SerializationUtils<int>.FromXmlString(response.Body, "count");
+            return SerializationUtils<int>.FromXmlString(response.Body, "count_doiconfirmationlinks");
         }
 
         /// <summary>
@@ -536,7 +536,7 @@ namespace Maileon.Mailings
             parameters.Add("format", format);
             
             ResponseWrapper response = Get("mailings/" + mailingId + "/contents/links/external/count");
-            return SerializationUtils<int>.FromXmlString(response.Body, "count");
+            return SerializationUtils<int>.FromXmlString(response.Body, "count_external_links");
         }
 
         /// <summary>
