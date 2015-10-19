@@ -13,6 +13,10 @@ namespace Maileon.Mailings
         [XmlEnum("none")]
         None,
         [XmlEnum("highest-permission")]
-        HighestPermission
+        HighestPermission,
+        [XmlEnum("single-recipient")]
+        SingleRecipient,
+        [XmlEnum("anonymous")]
+        Anonymous
     }
 }
