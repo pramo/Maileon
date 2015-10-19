@@ -10,7 +10,7 @@ namespace Maileon.Contacts
     /// <summary>
     /// Maileon Contact permissions
     /// </summary>
-    public enum Permissions
+    public enum Permission
     {
         [XmlEnum("1")]
         None = 1,

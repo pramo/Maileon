@@ -59,7 +59,7 @@ namespace Maileon.Contacts
         /// The permission of the contact
         /// </summary>
         [XmlElement("permission")]
-        public Permissions Permission { get; set; }
+        public Permission Permission { get; set; }
 
         /// <summary>
         /// Setting this to false will disable serialization of the Permission element
@@ -88,7 +88,7 @@ namespace Maileon.Contacts
 
         public Contact()
         {
-            this.Permission = Permissions.None;
+            this.Permission = Permission.None;
             this.StandardFields = new List<StandardField>();
             this.CustomFields = new List<CustomField>();
 

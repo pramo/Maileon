@@ -56,7 +56,7 @@ namespace Maileon.Contacts
         /// <param name="reimportUnsubscribedContacts">If set to true unsubscribed contacts will be reimported, else, they will be ignored.</param>
         /// <param name="updateOnly">If set to true only existing contacts will be updated. Not existing contacts will not be created.</param>
         /// <returns></returns>
-        public SynchronizationReport SynchronizeContacts(List<Contact> contacts, Permissions permission, SynchronizationMode syncMode, bool useExternalId, bool ignoreInvalidContacts, bool overridePermission, bool reimportUnsubscribedContacts, bool updateOnly)
+        public SynchronizationReport SynchronizeContacts(List<Contact> contacts, Permission permission, SynchronizationMode syncMode, bool useExternalId, bool ignoreInvalidContacts, bool overridePermission, bool reimportUnsubscribedContacts, bool updateOnly)
         {
             if (contacts == null) 
             {
@@ -261,7 +261,7 @@ namespace Maileon.Contacts
         /// <param name="email">the email address</param>
         public void DeleteContactsByEmail(string email) 
         {
-            Delete("contacts/" + HttpUtility.UrlEncode(email));
+            Delete("contacts/email/" + HttpUtility.UrlEncode(email));
         }
 
         /// <summary>
