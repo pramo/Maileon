@@ -29,9 +29,9 @@ namespace Maileon.Mailings
         [XmlElement("conditional_content_rulesetid")]
         public NullableValue<long> ConditionalContentRulesetId { get; set; }
         [XmlElement("event_type")]
-        public string EventType { get; set; }
+        public NullableValue<string> EventType { get; set; }
         [XmlElement("option_name")]
-        public string OptionName { get; set; }
+        public NullableValue<string> OptionName { get; set; }
 
         public Personalization() { }
     }
