@@ -11,7 +11,7 @@ namespace Maileon.Contacts
     /// A class for wrapping a list of contacts
     /// </summary>
     [XmlRoot("contacts")]
-    internal class ContactCollection
+    public class ContactCollection
     {
         public ContactCollection() { Items = new List<Contact>(); }
         public ContactCollection(List<Contact> items) { Items = items; }
