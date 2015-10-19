@@ -112,6 +112,12 @@ namespace Maileon.Utils.JSON
             PropertyInfo[] props = obj.GetType().GetProperties();
             foreach (PropertyInfo prop in props)
             {
+                IMaileonJsonSerializable maileonSerializable = prop.GetValue(obj) as IMaileonJsonSerializable;
+                if (maileonSerializable != null && maileonSerializable.IsEmpty())
+                {
+                    continue;
+                }
+
                 object[] attrs = prop.GetCustomAttributes(true);
                 foreach (object attr in attrs)
                 {
@@ -120,7 +126,6 @@ namespace Maileon.Utils.JSON
                     {
                         string propName = prop.Name;
                         string customName = customNameProperty.Name;
-
                         dictionary.Add(customName, prop.GetValue(obj));
                     }
                 }
