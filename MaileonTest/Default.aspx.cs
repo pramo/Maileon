@@ -31,8 +31,8 @@ namespace MaileonTest
 
             Contact contact = new Contact();
             contact.Email = "balogh.viktor@maileon.hu";
-            contact.Permission = Permissions.DoubleOptInPlus;
-            contact.StandardFields.Add(new StandardField(StandardFieldNames.Fullname, "Balogh Viktor"));
+            contact.Permission = Permission.DoubleOptInPlus;
+            contact.StandardFields.Add(new StandardField(StandardFieldName.Fullname, "Balogh Viktor"));
             contact.CustomFields.Add(new CustomField("Utolsó bejelentkezés", "2015-10-02 17:05"));
             contact.CustomFields.Add(new CustomField("Telefon", "+36301234567"));
 
