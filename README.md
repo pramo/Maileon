@@ -9,7 +9,7 @@ This library attempts to implement all the features of the Maileon API as they b
 ## Usage
 The library is split into various services; these services provide a way to manipulate different parts of the API.
 In most cases the path of the specific request determines the actual service that will provide that call in this library.
-For example all the calls relating to transactions (/transaction/*) can be found in the MaileonTransactionsService class.
+For example all the calls relating to [transactions](http://dev.maileon.com/api/rest-api-1-0/?lang=en#Transactions) (/transactions/*) can be found in the MaileonTransactionsService class.
 
 To use the Maileon API you have to provide a valid MaileonConfiguration object to the service classes. 
 The configuration contains information required to properly reach and authenticate with the API server.
