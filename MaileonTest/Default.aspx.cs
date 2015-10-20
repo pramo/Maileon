@@ -24,7 +24,7 @@ namespace MaileonTest
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            MaileonConfiguration config = new MaileonConfiguration("b8e09c19-98b9-4e0d-a2f4-d160e5d85bfc", "https://api.maileon.com/1.0/");
+            MaileonConfiguration config = new MaileonConfiguration(Properties.Settings.Default.apiKey, Properties.Settings.Default.baseUri);
             MaileonTransactionsService transactionsService = new MaileonTransactionsService(config);
             transactionsService.Debug = true;
             MaileonContactsService contactsService = new MaileonContactsService(config);
