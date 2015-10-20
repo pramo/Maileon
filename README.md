@@ -28,7 +28,7 @@ For information about the API keys and API key privileges contact your Maileon p
 
 The MIT License (MIT)
 
-Copyright (c) 2015 Viktor István Balogh
+Copyright (c) 2015 Viktor István Balog
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
