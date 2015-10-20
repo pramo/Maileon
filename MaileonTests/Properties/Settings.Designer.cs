@@ -37,7 +37,7 @@ namespace MaileonTests.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("5896e6bf-752b-4db3-955e-c24fc0479bd1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string apiKey {
             get {
                 return ((string)(this["apiKey"]));
@@ -49,67 +49,6 @@ namespace MaileonTests.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1548")]
-        public long mailingIdToDelete {
-            get {
-                return ((long)(this["mailingIdToDelete"]));
-            }
-            set {
-                this["mailingIdToDelete"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1548")]
-        public long mailingIdToSend {
-            get {
-                return ((long)(this["mailingIdToSend"]));
-            }
-            set {
-                this["mailingIdToSend"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("2665")]
-        public long mailingIdExistingRegular {
-            get {
-                return ((long)(this["mailingIdExistingRegular"]));
-            }
-            set {
-                this["mailingIdExistingRegular"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public long mailingIdExistingTrigger {
-            get {
-                return ((long)(this["mailingIdExistingTrigger"]));
-            }
-            set {
-                this["mailingIdExistingTrigger"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public long mailingIdExistingDoi {
-            get {
-                return ((long)(this["mailingIdExistingDoi"]));
-            }
-            set {
-                this["mailingIdExistingDoi"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("2665")]
         public long mailingIdArchived {
             get {
                 return ((long)(this["mailingIdArchived"]));
