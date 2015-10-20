@@ -18,11 +18,11 @@ Currently available base URIs:
 * https://adc.maileon.com/svc/ for AddressCheck
 * https://api.maileon.com/1.0/ for everything else
 
-For information about the API keys and API key privileges contact your Maileon provider.
+For more information about the API keys and privileges please contact your Maileon provider.
 
 ## Credits
 
-[Viktor Balogh](https://github.com/viktorbalog)
+[Viktor István Balog](https://github.com/viktorbalog)
 
 ## License
 
