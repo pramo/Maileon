@@ -22,26 +22,15 @@ namespace Maileon.AddressCheck
 
         public MaileonAddressCheckService(MaileonConfiguration config) : base(config, SERVICE) { }
 
-        public QualityStatus CheckAddressQuality(string email)
+        public AddressQuality CheckAddressQuality(string email)
         {
             ResponseWrapper response = Get("2.0/address/quality/" + HttpUtility.UrlEncode(email), null, ADDRESSCHECK_XML_MIME_TYPE);
-            return SerializationUtils<QualityStatus>.FromXmlString(response.Body);
+            return SerializationUtils<AddressQuality>.FromXmlString(response.Body);
         }
-
-        public SyntaxStatus CheckAddressSyntax(string email)
-        {
-            ResponseWrapper response = Get("2.0/address/syntax/" + HttpUtility.UrlEncode(email), null, ADDRESSCHECK_XML_MIME_TYPE);
-            return SerializationUtils<SyntaxStatus>.FromXmlString(response.Body);
-        }
-        
-        public QualityStatus CheckAddressQuality(Contact contact)
+       
+        public AddressQuality CheckAddressQuality(Contact contact)
         {
             return CheckAddressQuality(contact.Email);
-        }
-
-        public SyntaxStatus CheckAddressSyntax(Contact contact)
-        {
-            return CheckAddressSyntax(contact.Email);
         }
 
     }
