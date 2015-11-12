@@ -13,7 +13,7 @@ namespace Maileon.AddressCheck
     {
         [XmlElement("score")]
         public float Score { get; set; }
-        [XmlElement("value")]
-        public string Value { get; set; }
+        [XmlElement("domain")]
+        public string Domain { get; set; }
     }
 }
