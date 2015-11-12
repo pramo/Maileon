@@ -12,6 +12,21 @@ namespace Maileon.AddressCheck
     public class AddressQuality
     {
         /// <summary>
+        /// Whether the address was syntactically correct
+        /// </summary>
+        [XmlElement("syntax")]
+        public Syntax Syntax { get; set; }
+        /// <summary>
+        /// Whether the address was syntactically correct with the given provider
+        /// </summary>
+        [XmlElement("extsyntax")]
+        public bool ProviderSyntax { get; set; }
+        /// <summary>
+        /// Whether the address was syntactically correct with the given provider
+        /// </summary>
+        [XmlElement("domain")]
+        public bool DomainExists { get; set; }
+        /// <summary>
         /// Whether the test was actually performed or retrieved from SMTP cache.
         /// </summary>
         [XmlElement("checked")]
@@ -46,5 +61,8 @@ namespace Maileon.AddressCheck
         /// </summary>
         [XmlElement("domainScores")]
         public DomainScoreCollection DomainScores { get; set; }
+
+        [XmlElement("decoded")]
+        public string DecodedAddress { get; set; }
     }
 }
