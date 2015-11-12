@@ -11,7 +11,7 @@ namespace Maileon.AddressCheck
     [XmlRoot("domainScores")]
     public class DomainScoreCollection
     {
-        [XmlElement("domainScores")]
+        [XmlElement("domainScore")]
         public List<DomainScore> Items { get; set; }
     }
 }
