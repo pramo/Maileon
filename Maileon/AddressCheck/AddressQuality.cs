@@ -9,7 +9,7 @@ using System.Xml.Serialization;
 namespace Maileon.AddressCheck
 {
     [XmlRoot("qualityStatus")]
-    public class QualityStatus
+    public class AddressQuality
     {
         /// <summary>
         /// Whether the test was actually performed or retrieved from SMTP cache.
