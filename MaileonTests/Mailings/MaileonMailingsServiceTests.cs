@@ -90,9 +90,10 @@ namespace Maileon.Mailings.Tests
         [TestMethod()]
         public void GetArchiveUrlTest()
         {
-            string url = service.GetArchiveUrl(MaileonTests.Properties.Settings.Default.mailingIdExistingRegular);
+            /*string url = service.GetArchiveUrl(MaileonTests.Properties.Settings.Default.mailingIdExistingRegular);
 
-            Assert.AreEqual("http://sandbox.maileon.com/u/archive/z6SQtk30DaM", url);
+            Assert.AreEqual("http://sandbox.maileon.com/u/archive/z6SQtk30DaM", url);*/
+            Assert.Fail();
         }
 
         [TestMethod()]
