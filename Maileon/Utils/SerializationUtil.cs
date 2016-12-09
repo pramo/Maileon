@@ -23,6 +23,23 @@ namespace Maileon.Utils
     /// <typeparam name="T"></typeparam>
     internal static class SerializationUtils<T>
     {
+        private static readonly Dictionary<string, XmlSerializer> _serializers = new Dictionary<string, XmlSerializer>();
+        private static readonly XmlSerializer _defaultSerializer = new XmlSerializer(typeof(T));
+
+        private static XmlSerializer GetSerializer(string root)
+        {
+            if(root == null) { return _defaultSerializer; }
+            if (_serializers.ContainsKey(root)) { return _serializers[root]; }
+            
+            XmlRootAttribute rootOverride = null;
+            if (root != null) { rootOverride = new XmlRootAttribute { ElementName = root }; }
+
+            XmlSerializer serializer = new XmlSerializer(typeof(T), rootOverride);
+
+            _serializers.Add(root, serializer);
+            return serializer;
+        }
+
         /// <summary>
         /// Deserializes an XML string to an object
         /// </summary>
@@ -32,15 +49,9 @@ namespace Maileon.Utils
         {
             T result = default(T);
 
-            XmlRootAttribute rootOverride = null;
-
-            if (root != null) { rootOverride = new XmlRootAttribute { ElementName = root }; }
-
-            XmlSerializer serializer = new XmlSerializer(typeof(T), rootOverride);
-
             using (MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(src)))
             {
-                result = (T)serializer.Deserialize(stream);
+                result = (T)GetSerializer(root).Deserialize(stream);
             }
 
             return result;
@@ -64,12 +75,6 @@ namespace Maileon.Utils
         public static string ToXmlString(T obj, string root, bool omitXmlDeclaration)
         {
             string result = null;
-
-            XmlRootAttribute rootOverride = null;
-
-            if (root != null) { rootOverride = new XmlRootAttribute { ElementName = root }; }
-            
-            XmlSerializer serializer = new XmlSerializer(typeof(T), rootOverride);
             
             XmlWriterSettings settings = new XmlWriterSettings();
             settings.OmitXmlDeclaration = omitXmlDeclaration;
@@ -82,7 +87,7 @@ namespace Maileon.Utils
 
                 using (XmlWriter writer = XmlWriter.Create(stream, settings))
                 {
-                    serializer.Serialize(writer, obj, ns);
+                    GetSerializer(root).Serialize(writer, obj, ns);
                 }
 
                 //after serializing we need to 'rewind' the stream to read it
