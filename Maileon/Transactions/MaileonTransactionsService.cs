@@ -160,7 +160,7 @@ namespace Maileon.Transactions
             int i = 1;
             Page<TransactionType> page = GetTransactionTypes(i, 1000);
 
-            while(i < page.CountPages + 1)
+            while(i++ < page.CountPages + 1)
             {
                 foreach (TransactionType type in page.Items)
                 {
@@ -170,6 +170,7 @@ namespace Maileon.Transactions
                     }
                 }
 
+                if(i > page.CountPages) { break; }
                 page = GetTransactionTypes(i, 1000);
             }
 

@@ -59,6 +59,6 @@ namespace Maileon
         /// <param name="pageSize">The size of the page (elements on each page)</param>
         /// <param name="response">The response from the webservice that is parsed for X-Items and X-Pages to generate the new page</param>
         /// <returns>a Page</returns>
-        internal Page(int pageIndex, int pageSize, ResponseWrapper response) : this(pageIndex, pageSize, int.Parse(response.Headers.GetValues("X-Items").First()), int.Parse(response.Headers.GetValues("X-Pages").First())) { }
+        internal Page(int pageIndex, int pageSize, ResponseWrapper response) : this(pageIndex, pageSize, int.Parse(response.Headers.GetValues("X-Pages").First()), int.Parse(response.Headers.GetValues("X-Items").First())) { }
     }
 }
