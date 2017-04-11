@@ -47,7 +47,7 @@ namespace Maileon.Utils
         /// <summary>
         /// Returns the XmlEnum value for an enum value
         /// </summary>
-        /// <param name="enumVal"></param>
+        /// <param name="val"></param>
         /// <returns></returns>
         public static T FromXmlString<T>(string val)
         {

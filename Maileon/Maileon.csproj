@@ -28,6 +28,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\Maileon.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -46,9 +47,10 @@
     <Compile Include="AddressCheck\AddressExistance.cs" />
     <Compile Include="AddressCheck\DomainScore.cs" />
     <Compile Include="AddressCheck\DomainScoreCollection.cs" />
+    <Compile Include="AddressCheck\AddressCheckService.cs" />
     <Compile Include="AddressCheck\MailserverDiagnosis.cs" />
-    <Compile Include="AddressCheck\QualityStatus.cs" />
-    <Compile Include="AddressCheck\SyntaxStatus.cs" />
+    <Compile Include="AddressCheck\AddressQuality.cs" />
+    <Compile Include="AddressCheck\Syntax.cs" />
     <Compile Include="Blacklists\Blacklist.cs" />
     <Compile Include="Blacklists\Collections\BlacklistCollection.cs" />
     <Compile Include="Blacklists\Collections\EntryCollection.cs" />
@@ -167,7 +169,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

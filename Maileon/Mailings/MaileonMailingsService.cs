@@ -223,6 +223,7 @@ namespace Maileon.Mailings
         /// Sets the tracking strategy of the mailing with the provided id.
         /// </summary>
         /// <param name="mailingId"></param>
+        /// <param name="strategy"></param>
         /// <returns></returns>
         public void SetTrackingStrategy(long mailingId, TrackingStrategy strategy)
         {
@@ -417,10 +418,10 @@ namespace Maileon.Mailings
         /// Sets the target group id of the given mailing
         /// </summary>
         /// <param name="mailingId"></param>
-        /// <param name="tarGetgroupid"></param>
-        public void SetTargetGroupId(long mailingId, long targetgroupid) 
+        /// <param name="targetgroupId"></param>
+        public void SetTargetGroupId(long mailingId, long targetgroupId) 
         {
-            string body = SerializationUtils<long>.ToXmlString(targetgroupid, "targetgroupid");
+            string body = SerializationUtils<long>.ToXmlString(targetgroupId, "targetgroupid");
             Post("mailings/" + mailingId + "/targetgroupid", null, body);
         }
 
@@ -764,13 +765,15 @@ namespace Maileon.Mailings
         {
             return Get("mailings/" + mailingId + "/attachments/" + attachmentId, null, "*").Stream;
         }
-    
+
         /// <summary>
         /// Returns a page of mailings in the account that match the given schedule time
         /// </summary>
         /// <param name="scheduleTime"></param>
         /// <param name="beforeSchedulingTime"></param>
         /// <param name="fields"></param>
+        /// <param name="order"></param>
+        /// <param name="orderBy"></param>
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
@@ -792,12 +795,14 @@ namespace Maileon.Mailings
             page.Items = SerializationUtils<MailingCollection>.FromXmlString(response.Body);
             return page;
         }
-    
+
         /// <summary>
         /// Returns a page of mailings in the account that match the given types (one or a list)
         /// </summary>
         /// <param name="types"></param>
         /// <param name="fields"></param>
+        /// <param name="order"></param>
+        /// <param name="orderBy"></param>
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
@@ -849,7 +854,7 @@ namespace Maileon.Mailings
             page.Items = SerializationUtils<MailingCollection>.FromXmlString(response.Body);
             return page;
         }
-    
+
 
         /// <summary>
         /// Returns a page of mailings in the account that match the given keywords (one or a list)
@@ -857,10 +862,12 @@ namespace Maileon.Mailings
         /// <param name="keywords"></param>
         /// <param name="keywordsOp"></param>
         /// <param name="fields"></param>
+        /// <param name="order"></param>
+        /// <param name="orderBy"></param>
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
-	    public Page<Mailing> GetMailingsByKeywords(List<string> keywords, StringOperation keywordsOp, List<FieldType> fields, Order? order, FieldType? orderBy, int pageIndex, int pageSize) 
+        public Page<Mailing> GetMailingsByKeywords(List<string> keywords, StringOperation keywordsOp, List<FieldType> fields, Order? order, FieldType? orderBy, int pageIndex, int pageSize) 
         { 
             ValidatePaginationParameters(pageIndex, pageSize);
 
@@ -885,6 +892,8 @@ namespace Maileon.Mailings
         /// <param name="creatorName"></param>
         /// <param name="creatorNameOp"></param>
         /// <param name="fields"></param>
+        /// <param name="order"></param>
+        /// <param name="orderBy"></param>
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
@@ -913,6 +922,8 @@ namespace Maileon.Mailings
         /// <param name="subject"></param>
         /// <param name="subjectOp"></param>
         /// <param name="fields"></param>
+        /// <param name="order"></param>
+        /// <param name="orderBy"></param>
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
@@ -982,7 +993,7 @@ namespace Maileon.Mailings
         /// Create a new scheduling for a given mailing, using the given date.
         /// </summary>
         /// <param name="mailingId"></param>
-        /// <param name="time"></param>
+        /// <param name="schedule"></param>
         public void CreateSchedule(long mailingId, Schedule schedule)
         {
             QueryParameters parameters = new QueryParameters();
@@ -1008,6 +1019,7 @@ namespace Maileon.Mailings
         /// Update the current scheduling for a given mailing, using the given date.
         /// </summary>
         /// <param name="mailingId"></param>
+        /// <param name="schedule"></param>
         /// <returns></returns>
         public void UpdateSchedule(long mailingId, Schedule schedule)
         {

@@ -17,33 +17,44 @@ using Maileon.Utils.JSON;
 
 namespace Maileon.Utils
 {
+    internal static class SerializerFactory
+    {
+        private static Dictionary<Type, Dictionary<string, XmlSerializer>> _serializers = new Dictionary<Type, Dictionary<string, XmlSerializer>>();
+
+        /// <summary>
+        /// Returns the cached serializer for this type and root
+        /// </summary>
+        /// <param name="t">the type to deserialize</param>
+        /// <param name="root">the name of the field to deserialize</param>
+        /// <returns></returns>
+        public static XmlSerializer GetSerializer(Type t, string root)
+        {
+            if(root == null) { root = string.Empty; }
+
+            if (!_serializers.ContainsKey(t)) { _serializers.Add(t, new Dictionary<string, XmlSerializer>()); }
+            if (_serializers[t].ContainsKey(root)) { return _serializers[t][root]; }
+
+            XmlRootAttribute rootOverride = null;
+            if (root != string.Empty) { rootOverride = new XmlRootAttribute { ElementName = root }; }
+
+            XmlSerializer serializer = new XmlSerializer(t, rootOverride);
+
+            _serializers[t].Add(root, serializer);
+            return serializer;
+        }
+    }
+
     /// <summary>
     /// A static class for serializing/deserializing objects to/from XML/JSON strings
     /// </summary>
     /// <typeparam name="T"></typeparam>
     internal static class SerializationUtils<T>
     {
-        private static readonly Dictionary<string, XmlSerializer> _serializers = new Dictionary<string, XmlSerializer>();
-        private static readonly XmlSerializer _defaultSerializer = new XmlSerializer(typeof(T));
-
-        private static XmlSerializer GetSerializer(string root)
-        {
-            if(root == null) { return _defaultSerializer; }
-            if (_serializers.ContainsKey(root)) { return _serializers[root]; }
-            
-            XmlRootAttribute rootOverride = null;
-            if (root != null) { rootOverride = new XmlRootAttribute { ElementName = root }; }
-
-            XmlSerializer serializer = new XmlSerializer(typeof(T), rootOverride);
-
-            _serializers.Add(root, serializer);
-            return serializer;
-        }
-
         /// <summary>
         /// Deserializes an XML string to an object
         /// </summary>
         /// <param name="src">the string to deserialize</param>
+        /// <param name="root"></param>
         /// <returns></returns>
         public static T FromXmlString(string src, string root)
         {
@@ -51,7 +62,7 @@ namespace Maileon.Utils
 
             using (MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(src)))
             {
-                result = (T)GetSerializer(root).Deserialize(stream);
+                result = (T)SerializerFactory.GetSerializer(typeof(T), root).Deserialize(stream);
             }
 
             return result;
@@ -71,6 +82,8 @@ namespace Maileon.Utils
         /// Serializes an object to an XML string
         /// </summary>
         /// <param name="obj">the object to serialize</param>
+        /// <param name="root"></param>
+        /// <param name="omitXmlDeclaration"></param>
         /// <returns></returns>
         public static string ToXmlString(T obj, string root, bool omitXmlDeclaration)
         {
@@ -87,7 +100,7 @@ namespace Maileon.Utils
 
                 using (XmlWriter writer = XmlWriter.Create(stream, settings))
                 {
-                    GetSerializer(root).Serialize(writer, obj, ns);
+                    SerializerFactory.GetSerializer(typeof(T), root).Serialize(writer, obj, ns);
                 }
 
                 //after serializing we need to 'rewind' the stream to read it
@@ -115,6 +128,7 @@ namespace Maileon.Utils
         /// Serializes an object to an XML string
         /// </summary>
         /// <param name="obj">the object to serialize</param>
+        /// <param name="root"></param>
         /// <returns></returns>
         public static string ToXmlString(T obj, string root)
         {
@@ -125,6 +139,7 @@ namespace Maileon.Utils
         /// Serializes an object to an XML string
         /// </summary>
         /// <param name="obj">the object to serialize</param>
+        /// <param name="omitXmlDeclaration"></param>
         /// <returns></returns>
         public static string ToXmlString(T obj, bool omitXmlDeclaration)
         {

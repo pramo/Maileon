@@ -62,11 +62,12 @@ namespace Maileon.Reports
         /// <summary>
         /// Creates query parameters with the given variables
         /// </summary>
-        /// <param name="pageIndex"></param>
-        /// <param name="pageSize"></param>
         /// <param name="fromDate"></param>
         /// <param name="toDate"></param>
         /// <param name="mailingIdFilter"></param>
+        /// <param name="contactIdFilter"></param>
+        /// <param name="contactEmailFilter"></param>
+        /// <param name="contactExternalIdFilter"></param>
         /// <param name="embedFieldBackups"></param>
         /// <returns></returns>
         internal static QueryParameters CreateQueryParameters(

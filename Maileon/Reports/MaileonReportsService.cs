@@ -230,6 +230,7 @@ namespace Maileon.Reports
 
         /// <summary>
         /// Returns a page of contacts that subscribed for the given account. The contacts can be filtered either by a date interval or one or a list of mailing IDs (DOI Mailings). Note that this only returns subscribers that were subscribed by a DOI mailing that was sent through Maileon.
+        /// </summary>
         /// <param name="options">the options for this query</param>
         /// <param name="pageIndex">the index of the page</param>
         /// <param name="pageSize">the size of the page</param>
@@ -259,6 +260,7 @@ namespace Maileon.Reports
 
         /// <summary>
         /// Returns a page of block status changes. This can either be the contact has been blocked or unblocked. You can filter by the old and new status or you can get the number of block status changes only.
+        /// </summary>
         /// <param name="options">the options for this query</param>
         /// <param name="pageIndex">the index of the page</param>
         /// <param name="pageSize">the size of the page</param>
@@ -291,7 +293,7 @@ namespace Maileon.Reports
         /// </summary>
         /// <param name="pageIndex">the index of the page</param>
         /// <param name="pageSize">the size of the page</param>
-        /// <param name="parameters">the options for this query</param>
+        /// <param name="options">the options for this query</param>
         /// <returns></returns>
         private QueryParameters CreatePageQueryParameters(int pageIndex, int pageSize, AbstractParameters options)
         {

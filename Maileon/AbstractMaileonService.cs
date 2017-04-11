@@ -244,6 +244,7 @@ namespace Maileon
         /// <param name="path">the HTTP path</param>
         /// <param name="parameters">the query parameters</param>
         /// <param name="mimeType">the accept/contenttype header</param>
+        /// <param name="data">the request body</param>
         /// <returns></returns>
         private ResponseWrapper GetResponse(HttpWebRequestMethod method, string path, QueryParameters parameters, string mimeType, string data) 
         {
@@ -272,6 +273,7 @@ namespace Maileon
         /// <param name="path">the HTTP path</param>
         /// <param name="parameters">the query parameters</param>
         /// <param name="mimeType">the accept/contenttype header</param>
+        /// <param name="data">the request body</param>
         /// <returns></returns>
         private ResponseWrapper GetResponse(HttpWebRequestMethod method, string path, QueryParameters parameters, string mimeType, Stream data)
         {
@@ -309,11 +311,11 @@ namespace Maileon
         /// Helper enum used to list available HTTP methods
         /// </summary>
         private enum HttpWebRequestMethod { GET, POST, PUT, DELETE }
-    
+
         /// <summary>
         /// Gets a responsewrapper object from a request and analyze exceptions
         /// </summary>
-        /// <param name="resp">the response to analyze</param>
+        /// <param name="request">the response to analyze</param>
         private ResponseWrapper DoRequest(WebRequest request) 
         {
             try

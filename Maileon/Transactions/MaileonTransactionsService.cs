@@ -79,7 +79,7 @@ namespace Maileon.Transactions
         /// <summary>
         /// Creates a transaction in the account
         /// </summary>
-        /// <param name="transactions">the transactions to create</param>
+        /// <param name="transaction">the transactions to create</param>
         /// <param name="release">whether the transaction should be released instantly</param>
         /// <param name="ignoreInvalidTransactions">if set to false invalid contacts will throw exceptions</param>
         /// <returns>a transaction processing report</returns>
@@ -91,7 +91,7 @@ namespace Maileon.Transactions
         /// <summary>
         /// Creates a transaction in the account
         /// </summary>
-        /// <param name="transactions">the transactions to create</param>
+        /// <param name="transaction">the transactions to create</param>
         /// <returns>a transaction processing report</returns>
         public TransactionProcessingReport CreateTransaction(Transaction transaction)
         {
