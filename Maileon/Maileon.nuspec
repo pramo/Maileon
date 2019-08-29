@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>Maileon</id>
+    <version>1.0.1.0</version>
+    <title>Maileon</title>
+    <authors>Viktor Balog</authors>
+    <owners>Viktor Balog</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <licenseUrl>https://github.com/viktorbalog/Maileon/blob/master/README.md</licenseUrl>
+    <projectUrl>https://github.com/viktorbalog/Maileon</projectUrl>
+    <description>Maileon API Client</description>
+    <releaseNotes>Fixed custom contact field creation and added contact creation by external id</releaseNotes>
+    <copyright>Copyright 2019</copyright>
+    <tags>maileon</tags>
+    <dependencies>
+      <dependency id="RestSharp" version="105.0.1" />
+    </dependencies>
+  </metadata>
+  <files>
+	<file src="..\Maileon\bin\Release\Maileon.xml" target="lib\net45" />
+  </files>
+</package>
