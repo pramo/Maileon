@@ -42,7 +42,7 @@ namespace Maileon
         /// <summary>
         /// Whether debug mode is enabled
         /// </summary>
-        public bool Debug { get; set; }
+        protected bool debug { get; set; }
 
         /// <summary>
         /// The name of this service
@@ -59,10 +59,7 @@ namespace Maileon
             this.config = config;
             this.encodedApiKey =  Base64Encode(config.APIKey);
             this.service = service;
-#if DEBUG
-            this.Debug = true;
-#endif
-
+            this.debug = config.Debug;
         }
 
         /// <summary>
@@ -368,7 +365,7 @@ namespace Maileon
         /// <param name="body">the body of the request</param>
         private void DebugPrintRequest(HttpWebRequest request, string body)
         {
-            if(Debug)
+            if(debug)
             { 
                 Diagnostics.Debug.WriteLine("Request:");
                 Diagnostics.Debug.WriteLine(request.Method + " " + request.RequestUri.ToString());
@@ -389,7 +386,7 @@ namespace Maileon
         /// <param name="response">the response to print</param>
         private void DebugPrintResponse(ResponseWrapper response)
         {
-            if (Debug)
+            if (debug)
             {
                 Diagnostics.Debug.WriteLine("Response:");
                 Diagnostics.Debug.WriteLine(string.Format("{0} {1}", (int)response.Status.Code, response.Status.Reason));

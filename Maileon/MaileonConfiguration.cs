@@ -19,11 +19,16 @@ namespace Maileon
         /// The Base URI for this Maileon Configuration
         /// </summary>
         public string BaseURI { get; private set; }
+        /// <summary>
+        /// Is debug mode enabled
+        /// </summary>
+        public bool Debug { get; private set; }
 
-        public MaileonConfiguration(string APIKey, string BaseURI)
+        public MaileonConfiguration(string APIKey, string BaseURI, bool debug = false)
         {
             this.APIKey = APIKey;
             this.BaseURI = BaseURI;
+            this.Debug = debug;
         }
     }
 }
