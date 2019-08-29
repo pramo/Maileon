@@ -18,6 +18,8 @@ namespace Maileon.Contacts
         Boolean,
         [XmlEnum("float")]
         Float,
+        [XmlEnum("double")]
+        Double,
         [XmlEnum("date")]
         Date
     }

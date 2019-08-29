@@ -11,7 +11,7 @@ namespace Maileon.Contacts
     /// A class for wrapping a list of CustomContactFieldDefinitions
     /// </summary>
     [XmlRoot("custom_fields")]
-    internal class CustomFieldDefinitionCollection
+    public class CustomFieldDefinitionCollection
     {
         public CustomFieldDefinitionCollection() { Items = new List<CustomFieldDefinition>(); }
         public CustomFieldDefinitionCollection(List<CustomFieldDefinition> items) { Items = items; }
