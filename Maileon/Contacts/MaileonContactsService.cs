@@ -35,16 +35,6 @@ namespace Maileon.Contacts
         }
 
         /// <summary>
-        /// Creates the contact
-        /// </summary>
-        /// <param name="contact">the contact</param>
-        /// <param name="syncMode">the maileon synchronization mode</param>
-        public void CreateContact(Contact contact, SynchronizationMode syncMode)
-        {
-            CreateContact(contact, syncMode, null, null, false, false, null);
-        }
-
-        /// <summary>
         /// Synchronizes (updates) the contacts in the account with the data from a list of contacts and returns a detailed report with stats and validation errors
         /// </summary>
         /// <param name="contacts">List of contacts to be synchronized</param>
@@ -81,7 +71,7 @@ namespace Maileon.Contacts
         }
 
         /// <summary>
-        /// Creates the contact
+        /// Creates the contact by email address
         /// </summary>
         /// <param name="contact">the contact</param>
         /// <param name="syncMode">the sync mode</param>
@@ -90,7 +80,7 @@ namespace Maileon.Contacts
         /// <param name="doi">the doi</param>
         /// <param name="doiPlus">the doi plus</param>
         /// <param name="doiMailingKey">the doi mailing key</param>
-        public void CreateContact(Contact contact, SynchronizationMode syncMode, string src, string subscriptionPage, bool doi, bool doiPlus, string doiMailingKey) 
+        public void CreateContact(Contact contact, SynchronizationMode syncMode, string src = null, string subscriptionPage = null, bool doi = false, bool doiPlus = false, string doiMailingKey = null) 
         {
             if (contact == null) 
             {
@@ -99,6 +89,10 @@ namespace Maileon.Contacts
             if (contact.Email == null)
             {
                 throw new MaileonClientException("email address cannot be null", null);
+            }
+            if(contact.Email != null && contact.ExternalId != null)
+            {
+                throw new MaileonClientException("ExternalId cannot be set when using CreateContact", null);
             }
 
             QueryParameters parameters = new QueryParameters();
@@ -116,6 +110,47 @@ namespace Maileon.Contacts
 
             string xml = SerializationUtils<Contact>.ToXmlString(contact);
             Post("contacts/" + HttpUtility.UrlEncode(contact.Email), parameters, xml);
+        }
+
+        /// <summary>
+        /// Creates the contact by external ID
+        /// </summary>
+        /// <param name="contact">the contact</param>
+        /// <param name="syncMode">the sync mode</param>
+        /// <param name="src">the src</param>
+        /// <param name="subscriptionPage">the subscription page</param>
+        /// <param name="doi">the doi</param>
+        /// <param name="doiPlus">the doi plus</param>
+        /// <param name="doiMailingKey">the doi mailing key</param>
+        public void CreateContactByExternalId(Contact contact, SynchronizationMode syncMode, string src = null, string subscriptionPage = null, bool doi = false, bool doiPlus = false, string doiMailingKey = null)
+        {
+            if (contact == null)
+            {
+                throw new MaileonClientException("contact cannot be null", null);
+            }
+            if (contact.ExternalId == null)
+            {
+                throw new MaileonClientException("external id cannot be null", null);
+            }
+
+            QueryParameters parameters = new QueryParameters();
+            parameters.Add("permission", (int)contact.Permission);
+            parameters.Add("sync_mode", (int)syncMode);
+            parameters.Add("src", src);
+            parameters.Add("subscription_page", subscriptionPage);
+            parameters.Add("doi", doi);
+            parameters.Add("doiplus", doiPlus);
+            parameters.Add("doimailing", doiMailingKey);
+
+            //this method doesn't accept permission in the contact body
+            contact.PermissionSpecified = false;
+            contact.SerializeAnonymousSpecified = false;
+
+            string externalId = contact.ExternalId;
+            contact.ExternalId = null;
+
+            string xml = SerializationUtils<Contact>.ToXmlString(contact);
+            Post("contacts/externalid/" + HttpUtility.UrlEncode(externalId), parameters, xml);
         }
 
         /// <summary>
