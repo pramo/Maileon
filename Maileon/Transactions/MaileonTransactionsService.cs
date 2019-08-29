@@ -164,7 +164,7 @@ namespace Maileon.Transactions
             {
                 foreach (TransactionType type in page.Items)
                 {
-                    if (type.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase))
+                    if (type.Name.Equals(name, StringComparison.InvariantCulture))
                     {
                         return type.Id.Value;
                     }
