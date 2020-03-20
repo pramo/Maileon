@@ -78,11 +78,13 @@ namespace Maileon.Contactfilters
 	    /// </summary>
 	    /// <param name="contactFilterId">The contactfilter ID to refresh</param>
         /// <param name="time">The filter is refreshed if the last update has been before the given time</param>
-	    public void RefreshContactFilterContacts(long contactFilterId, Timestamp time) 
+	    public void RefreshContactFilterContacts(long contactFilterId, Timestamp time = null, bool async = false) 
         {
     	    QueryParameters qp = new QueryParameters();
-	        qp.Add("time", time);
-		    Get("contactfilters/contactfilter/" + contactFilterId.ToString() + "/refresh", qp);
+            qp.Add("time", time);
+            qp.Add("async", async);
+
+            Get("contactfilters/contactfilter/" + contactFilterId.ToString() + "/refresh", qp);
 	    }
     }
 
