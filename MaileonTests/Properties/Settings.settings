@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="MaileonTests.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="BASE_URI" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://api.maileon.com/1.0</Value>
+    </Setting>
+    <Setting Name="BASE_URI_SLASH" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://api.maileon.com/1.0/</Value>
+    </Setting>
+    <Setting Name="API_KEY" Type="System.String" Scope="User">
+      <Value Profile="(Default)">260afd12-3b6a-40de-910c-b52102e280b1</Value>
+    </Setting>
+    <Setting Name="EXISTING_CONTACT_FILTER_ID" Type="System.Int64" Scope="User">
+      <Value Profile="(Default)">1755</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
