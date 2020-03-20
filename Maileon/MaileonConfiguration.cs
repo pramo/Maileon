@@ -27,6 +27,11 @@ namespace Maileon
         public MaileonConfiguration(string APIKey, string BaseURI, bool debug = false)
         {
             this.APIKey = APIKey;
+            if(!BaseURI.EndsWith("/"))
+            {
+                BaseURI += "/";
+            }
+
             this.BaseURI = BaseURI;
             this.Debug = debug;
         }

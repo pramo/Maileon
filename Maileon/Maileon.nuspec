@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
   <metadata>
     <id>Maileon</id>
-    <version>1.0.1.0</version>
+    <version>1.0.1.1</version>
     <title>Maileon</title>
     <authors>Viktor Balog</authors>
     <owners>Viktor Balog</owners>
@@ -10,8 +10,8 @@
     <licenseUrl>https://github.com/viktorbalog/Maileon/blob/master/README.md</licenseUrl>
     <projectUrl>https://github.com/viktorbalog/Maileon</projectUrl>
     <description>Maileon API Client</description>
-    <releaseNotes>Fixed custom contact field creation and added contact creation by external id</releaseNotes>
-    <copyright>Copyright 2019</copyright>
+    <releaseNotes>Added some tests and automatically fix BASE_URI ending without slash</releaseNotes>
+    <copyright>Copyright 2020</copyright>
     <tags>maileon</tags>
     <dependencies>
       <dependency id="RestSharp" version="105.0.1" />
